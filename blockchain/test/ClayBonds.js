@@ -1,21 +1,18 @@
 import { takeSnapshot, revertSnapshot, advanceTime } from './_utils/evm';
-import { setup } from './_utils/deploy';
 import truffleAssert from 'truffle-assertions';
+const AvatarsC = artifacts.require('Avatars.sol');
 
 contract('ClayBonds', async accounts => {
     // Accounts
-    const [Owner, UserA, UserB, UserC, UserD] = accounts;
+    const [Owner, UserA] = accounts;
     const YEAR = 31622400;
     const BN = web3.utils.toBN;
     let Contracts = {};
+    let Avatars;
     // State snapshotting
     let snapshotId;
     beforeEach(async () => {
         snapshotId = await takeSnapshot(web3);
-        await Contracts.clay.approve(Contracts.bonds.address, web3.utils.toWei('200000', 'ether'));
-        await Contracts.clay.approve(Contracts.bonds.address, web3.utils.toWei('200000', 'ether'), {
-            from: UserA
-        });
     });
     afterEach(async () => {
         await revertSnapshot(web3, snapshotId);
@@ -23,59 +20,75 @@ contract('ClayBonds', async accounts => {
 
     // Setup
     before(async () => {
-        Contracts = await setup(Owner, UserA, UserB);
-        await Contracts.clay.transfer(UserA, web3.utils.toWei('100', 'ether'));
+        Avatars = await AvatarsC.new(
+            'Avatars',
+            'AVA',
+            web3.utils.toWei('0.5', 'ether'),
+            web3.utils.toWei('0.01', 'ether'),
+            5000
+        );
     });
-    describe('One year bond', async () => {
+    describe('Avatars', async () => {
         //50538
-        it('mint()', async () => {
-            const tx = await Contracts.bonds.mint(web3.utils.toWei('10', 'ether'));
-            const id = tx.receipt.logs[3].args;
-            console.log(id.reward.toString());
-            console.log(id.apy.toString());
-            console.log(id.amount.toString());
-            console.log(id.poy.toString());
-            const balance = await Contracts.bonds.balanceOf(Owner);
-            console.log(balance.toString());
-
-            // assert.ok(balance.toString() == web3.utils.toWei('20', 'ether'));
+        // await advanceTime(YEAR - 100000);
+        it('should mint()', async () => {
+            const balance = await Avatars.balanceOf(Owner);
+            const tx = await Avatars.buy({ value: web3.utils.toWei('0.4', 'ether') });
+            const balance1 = await Avatars.balanceOf(Owner);
+            console.log(balance.toString(), balance1.toString());
+            assert.ok(balance1.toString() == balance.toNumber() + 1);
         });
-        it('mint()', async () => {
-            await advanceTime(YEAR - 100000);
-            const tx = await Contracts.bonds.mint(web3.utils.toWei('1', 'ether'), { from: UserA });
-            const id = tx.receipt.logs[3].args;
-            console.log(id.reward.toString());
-            console.log(id.apy.toString());
-            console.log(id.amount.toString());
-            console.log(id.poy.toString());
-
-            const balance = await Contracts.bonds.balanceOf(UserA);
-            console.log(balance.toString());
+        it('should mint() multi tokens', async () => {
+            const balance = await Avatars.balanceOf(Owner);
+            const amount = 5;
+            const tx = await Avatars.buyMulti(amount, {
+                from: Owner,
+                value: web3.utils.toWei('2.1', 'ether')
+            });
+            const balance1 = await Avatars.balanceOf(Owner);
+            console.log(balance1.toString(), balance.toNumber() + amount);
+            assert.ok(balance1.toString() == balance.toNumber() + amount);
 
             // assert.ok(balance.toString() == web3.utils.toWei('20000', 'ether'));
         });
-        it('claim()', async () => {
+        it('should claim() a single claim', async () => {
             const amount = web3.utils.toWei('10', 'ether');
-            const balance = await Contracts.clay.balanceOf(UserA);
-            console.log(balance.toString());
-            const tx = await Contracts.bonds.mint(amount, { from: UserA });
-            await advanceTime(YEAR * 3);
-            const tx2 = await Contracts.bonds.claim({ from: UserA });
-            const clayBalance = await Contracts.clay.balanceOf(UserA);
-            const bondBalance = await Contracts.bonds.balanceOf(UserA);
-
-            assert.equal(bondBalance.toString(), '0');
-            console.log(clayBalance.toString());
-            // assert.equal(
-            //     clayBalance.toString(),
-            //     BN(amount)
-            //         .add(
-            //             BN(amount)
-            //                 .div(BN(100))
-            //                 .mul(BN(30))
-            //         )
-            //         .toString()
-            // );
+            const pending = await Avatars.pendingRoyalties(1);
+            await Avatars.sendTransaction({ from: Owner, value: amount });
+            const pending1 = await Avatars.pendingRoyalties(1);
+            const share = await Avatars.avatars.call(1);
+            const totalRoyalties = await Avatars.totalRoyalties.call();
+            assert.equal(
+                web3.utils
+                    .toBN(totalRoyalties.toString())
+                    .div(web3.utils.toBN(100))
+                    .mul(web3.utils.toBN(share.tokenShare.toString()))
+                    .div(web3.utils.toBN(web3.utils.toWei('1', 'ether')))
+                    .toString(),
+                web3.utils.toBN(pending1.toString()).toString()
+            );
+            await Avatars.claim(1);
+        });
+        it('should fail after claim()', async () => {
+            const amount = web3.utils.toWei('10', 'ether');
+            const pending = await Avatars.pendingRoyalties(1);
+            await Avatars.sendTransaction({ from: Owner, value: amount });
+            const pending1 = await Avatars.pendingRoyalties(1);
+            const share = await Avatars.avatars.call(1);
+            const totalRoyalties = await Avatars.totalRoyalties.call();
+            assert.equal(
+                web3.utils
+                    .toBN(totalRoyalties.toString())
+                    .div(web3.utils.toBN(100))
+                    .mul(web3.utils.toBN(share.tokenShare.toString()))
+                    .div(web3.utils.toBN(web3.utils.toWei('1', 'ether')))
+                    .toString(),
+                web3.utils.toBN(pending1.toString()).toString()
+            );
+            await Avatars.claim(1);
+            await truffleAssert.fails(Avatars.claim(1), truffleAssert.ErrorType.revert, 'Nothing to claim');
+            await Avatars.sendTransaction({ from: Owner, value: amount });
+            await Avatars.claim(1);
         });
         // describe('Reverts', async () => {
         //     it('amount 0', async () => {
@@ -97,52 +110,4 @@ contract('ClayBonds', async accounts => {
         //     });
         // });
     });
-    // it('fill() - should fill an order', async () => {
-    //     await Contracts.weth.approve(
-    //         Contracts.zygoProtocol.address,
-    //         web3.utils.toWei('200000000000', 'ether')
-    //     );
-    //     await Contracts.zygo.approve(
-    //         Contracts.zygoProtocol.address,
-    //         web3.utils.toWei('200000000000', 'ether')
-    //     );
-
-    //     const fromAmount = web3.utils.toWei('5', 'ether');
-    //     const toAmount = web3.utils.toWei('20', 'ether');
-
-    //     const tx = await Contracts.zygoProtocol.create(
-    //         Contracts.weth.address,
-    //         fromAmount,
-    //         Contracts.tka.address,
-    //         toAmount
-    //     );
-
-    //     const orderId = tx.receipt.logs[0].args.orderId;
-    //     const order = await Contracts.zygoProtocol.orders.call(orderId);
-    //     const tkaBalanceBefore = await Contracts.tka.balanceOf(UserA);
-    //     const zygoBefore = await Contracts.zygo.balanceOf(UserA);
-    //     await Contracts.tka.approve(
-    //         Contracts.zygoProtocol.address,
-    //         web3.utils.toWei('200000000000', 'ether'),
-    //         { from: UserA }
-    //     );
-
-    //     await Contracts.zygoProtocol.fill(orderId.toString(), { from: UserA });
-
-    //     const tkaBalanceAfter = await Contracts.tka.balanceOf(UserA);
-    //     const zygoAfter = await Contracts.zygo.balanceOf(UserA);
-
-    //     assert.ok(
-    //         web3.utils
-    //             .toBN(zygoAfter)
-    //             .sub(web3.utils.toBN(zygoBefore))
-    //             .eq(web3.utils.toBN(fromAmount))
-    //     );
-    //     assert.ok(
-    //         web3.utils
-    //             .toBN(tkaBalanceBefore)
-    //             .sub(web3.utils.toBN(tkaBalanceAfter))
-    //             .eq(web3.utils.toBN(toAmount))
-    //     );
-    // });
 });

@@ -1,14 +1,21 @@
 <template>
     <div class="trade">
-        <Box boxName="Starting project">
+        <Box boxName="Starting project" class="content">
             <div slot="boxContent">
                 <h3>This is a starting off point for any crypto project</h3>
                 <div class="prices">
-                    <PriceView :price="TOKENS_getBalance(TOKEN_getAddressBySymbol('TKA'))" asset="TKA" />
-                    <PriceView :price="TOKENS_getBalance(TOKEN_getAddressBySymbol('WETH'))" asset="WETH" />
+                    <Button buttonStyle="primary" @clicked="AVATARS_buy" title="MINT A BEAN"></Button>
                 </div>
             </div>
         </Box>
+        <div class="bean-grid">
+            <Box v-for="(item, index) in AVATARS_getTokens" :key="index" :boxName="index">
+                <div slot="boxContent">
+                    {{ item.key }}
+                    <h2>ETH: {{ item.pendingRoyalties | fromWeiToReadable }}</h2>
+                </div>
+            </Box>
+        </div>
     </div>
 </template>
 
@@ -18,31 +25,43 @@
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import Box from '@/components/generics/Box.vue';
+import Button from '@/components/generics/Button.vue';
 import PriceView from '@/components/generics/PriceView.vue';
 
 // import Button from '@/components/generics/Button.vue';
 export default {
     name: 'Trade',
+    data() {
+        return {
+            numbers: []
+        };
+    },
     computed: {
-        ...mapGetters(['ST_getAll', 'Address', 'TOKENS_getBalance', 'TOKEN_getAddressBySymbol'])
+        ...mapGetters(['AVATARS_getBalance', 'Address', 'AVATARS_getTokens']),
+        balance() {
+            return this.AVATARS_getBalance.length ? new Array(parseInt(this.AVATARS_getBalance)) : [];
+        }
     },
     methods: {
-        ...mapActions(['TOKENS_balanceOf'])
+        ...mapActions(['AVATARS_buy', 'AVATARS_tokenOfOwnerByIndex'])
     },
     components: {
         Box,
-        PriceView
+        Button
     }
 };
 </script>
 <style lang="scss">
 .trade {
-    position: relative;
-    display: flex;
+    display: grid;
     justify-content: center;
-    align-items: center;
-    margin-top: 150px;
-
+    width: auto;
+    align-items: start;
+    margin: 150px 300px 0 300px !important;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 50px;
+    grid-column-gap: 100px;
+    padding-bottom: 100px;
     .prices {
         display: flex;
         justify-content: space-evenly;

@@ -4,6 +4,7 @@ import { RootState, Network } from '../types';
 import Web3 from 'web3';
 // import EMP from '@/../../blockchain/build/contracts/ExpiringMultiParty.json';
 import ERC20 from '@/../../blockchain/build/contracts/ERC20.json';
+import Avatars from '@/../../blockchain/build/contracts/Avatars.json';
 import { addressZero } from '@/utils';
 
 export const actions: ActionTree<Network, RootState> = {
@@ -44,27 +45,15 @@ export const actions: ActionTree<Network, RootState> = {
         const { Address } = context.getters;
         await context.dispatch('setupWeb3');
         await context.dispatch('getNetworkData');
-
-
-        const tokenAddresses = [
-            '0x7F71541f34e2C04ad7d42b2FA1c11Fad188503af',
-            '0x75E29300937497bE6Dbe8d1772d3f42155D3092e',
-            '0xD41A7F1f8334C8c01dDD4dCAde4686A95453FEc7'
-        ];
-
-        const tokensP = tokenAddresses.map(address => context.dispatch('NETWORK_setupToken', { address }));
-        await Promise.all(tokensP);
+        await context.dispatch('NETWORK_setupAvatars', { address: '0x7F71541f34e2C04ad7d42b2FA1c11Fad188503af' });
 
     },
 
-    async NETWORK_setupToken(context: ActionContext<Network, RootState>, payload: { address: string }) {
+    async NETWORK_setupAvatars(context: ActionContext<Network, RootState>, payload: { address: string }) {
         const { Web3, NetworkId, Address } = context.getters;
-        const TOKEN_CONTRACT = new Web3.eth.Contract(ERC20.abi, payload.address);
-        await context.commit('ADD_TOKEN_CONTRACT', { TOKEN_CONTRACT, address: payload.address });
-        await context.dispatch('TOKENS_name', { tokenAddress: payload.address });
-        await context.dispatch('TOKENS_symbol', { tokenAddress: payload.address });
-        await context.dispatch('TOKENS_balanceOf', { tokenAddress: payload.address, address: Address });
-
+        const AVATAR_CONTRACT = new Web3.eth.Contract(Avatars.abi, payload.address);
+        await context.commit('SET_AVATAR_CONTRACT', AVATAR_CONTRACT);
+        await context.dispatch('AVATARS_setup');
     },
 };
 

@@ -14,10 +14,11 @@
     "deploy-matic": "truffle deploy --network matic",
     "preinstall": "npx only-allow pnpm",
     "migrate": "truffle migrate",
-    "ganache": "ganache-cli -p 8545 -m 'destroy tattoo traffic around cash dolphin side recycle can limb illegal document' -e 100000000",
+    "ganache": "ganache-cli -p 7545 -m 'destroy tattoo traffic around cash dolphin side recycle can limb illegal document' -e 100000000",
     "flatten": "truffle-flattener ./contracts/MockERC20.sol > ./flatten.txt"
   },
   "dependencies": {
+    "@chainlink/contracts": "^0.2.1",
     "@openzeppelin/upgrades": "^2.8.0",
     "@truffle/hdwallet-provider": "^1.1.1",
     "bignumber.js": "^9.0.0",
@@ -31,7 +32,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "^7.9.2",
-    "@openzeppelin/contracts": "^3.4.0",
+    "@openzeppelin/contracts": "^4.3.0",
     "@openzeppelin/truffle-upgrades": "^1.2.5",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",

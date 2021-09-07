@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { avatars } from './Avatars/';
 import { network } from './Network';
 import { tokens } from './Tokens';
 import { userInterfaceManager } from './UserInterfaceManager';
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     modules: {
         network,
         tokens,
+        avatars,
         userInterfaceManager,
     },
     plugins: []

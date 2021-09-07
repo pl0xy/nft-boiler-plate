@@ -10,13 +10,8 @@ export interface Network {
     web3Ready: boolean;
     web3: any;
     contracts: {
-        EMPs: { [key: string]: any };
         syntheticTokens: { [key: string]: any };
-        swapPairs: { [key: string]: any };
-        clayToken: any;
-        clayBonds: any;
-        stakePools: any;
-        swapRouter: any;
+        avatars: any;
     };
     ethReady: boolean;
     userAddress: string;
@@ -27,6 +22,20 @@ export interface NetworkData {
     currentBlock: number;
     network: string;
     networkId: number;
+}
+
+
+export interface Avatars {
+    balance: string;
+    tokens: {
+        [key: string]: Avatar;
+    }
+}
+
+export interface Avatar {
+    name: string;
+    pendingRoyalties: string;
+    id: string;
 }
 
 export interface Tokens {
@@ -47,7 +56,6 @@ export interface UserInterfaceManager {
     success: {
         msg: string;
     };
-    localStarPosition: StarPosition;
     planetDiscoveredMessage: string;
     planetDiscoveredHeader: string;
 }

@@ -13,19 +13,11 @@ export const state: Network = {
     userAddress: addressZero,
     web3Ready: false,
     contracts: {
-        EMPs: {
-
-        },
+        avatars: null,
         syntheticTokens: {
 
         },
-        swapPairs: {
 
-        },
-        stakePools: null,
-        swapRouter: null,
-        clayBonds: null,
-        clayToken: null,
     },
     web3: null,
     ethReady: false,
