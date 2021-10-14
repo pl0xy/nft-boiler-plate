@@ -2,12 +2,14 @@
     <header class="header-nav">
         <div class="content">
             <div class="logo-container">
-                <h2>G.P <img src="@/assets/img/hoody_no_bg.png" /> C.P</h2>
+                <h2>G.P <sushi /> C.P</h2>
             </div>
             <div class="nav">
-                <opensea class="social-media" />
-                <a href="https://discord.gg/bT9q7r2vaT" target="_blank"><discord class="social-media"/></a>
-                <a href=""><twitter class="social-media"/></a>
+                <a class="social-media" href="https://discord.gg/bT9q7r2vaT" target="_blank"
+                    ><opensea class="social-media"
+                /></a>
+                <a class="social-media" href="https://discord.gg/bT9q7r2vaT" target="_blank"><discord /></a>
+                <a class="social-media" href="https://twitter.com/GPCP_community"><twitter /></a>
                 <button v-if="Address == emptyAddress" class="connect" @click="connectWallet()">
                     Connect
                 </button>
@@ -28,6 +30,7 @@ import Button from '@/components/generics/Button.vue';
 import opensea from '@/assets/svg/opensea.svg';
 import twitter from '@/assets/svg/twitter.svg';
 import discord from '@/assets/svg/discord.svg';
+import sushi from '@/assets/svg/sushi.svg';
 
 @Component({
     components: {
@@ -35,7 +38,8 @@ import discord from '@/assets/svg/discord.svg';
         Button,
         opensea,
         twitter,
-        discord
+        discord,
+        sushi
     },
     methods: {
         ...mapActions(['bootstrapContracts']),
@@ -60,10 +64,12 @@ export default class Header extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '@/styles';
 .header-nav {
     width: 100%;
     height: 100px;
     display: flex;
+    justify-content: center;
     .balance-wallet {
         position: absolute;
         right: 300px;
@@ -85,29 +91,57 @@ export default class Header extends Vue {
 
     h2 {
         font-size: 26pt;
-        .dot {
-            color: var(--button-color);
+    }
+    @include breakpoint(mobileonly) {
+        .content {
+            width: 100% !important;
+        .nav .social-media{
+            display: none;
         }
-        .finance {
-            color: var(--main-secondary);
+        }
+    }
+    @include breakpoint(tablet) {
+        .content {
+            width: 100% !important;
+            .nav {
+                display: none;
+            }
+        }
+    }
+    @include breakpoint(phablet) {
+        .content {
+            width: 100% !important;
+            .nav {
+                display: none;
+            }
         }
     }
 
+    @include breakpoint(laptop) {
+        .content {
+            width: 1000px !important;
+        }
+    }
+    @include breakpoint(desktop) {
+        .content {
+            width: 1500px !important;
+        }
+    }
     .content {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: inherit;
         top: 0;
-
+        margin:: 0 10px;
         .logo-container {
             display: flex;
-            margin-left: 300px;
             justify-content: center;
             align-items: center;
 
-            img {
+            svg {
                 height: 50px;
+                width: 40px;
             }
             h2 {
                 line-height: 20px;
@@ -126,9 +160,11 @@ export default class Header extends Vue {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 300px;
 
             .social-media {
+
+                & > * {
+
                 padding: 5px;
                 height: 35px;
                 width: 35px;
@@ -139,6 +175,7 @@ export default class Header extends Vue {
                     path {
                         fill: var(--button-color);
                     }
+                }
                 }
             }
         }
@@ -181,7 +218,6 @@ export default class Header extends Vue {
             padding: 0 10px;
             padding-top: 9px;
             justify-content: center;
-         
         }
     }
 }

@@ -19,7 +19,7 @@
                 :ref="'article' + index"
             />
             <div class="roadmap-end">
-                <h2>KEEP EXPLORING THE GUINEA PIG PARTY!</h2>
+                <h2>THEN WE KEEP EXPLORING THE GUINEA PIG PARTY!</h2>
             </div>
             <div class="progress-bar">
                 <div class="circle"></div>
@@ -31,7 +31,6 @@
             ref="imageChain"
             :style="{ transform: 'translateY(' + imageChainPos + 'px)' }"
         >
-            {{ '-' + imageChainPos + 'px' }}
             <img
                 v-for="(item, index) in imageChain"
                 :ref="'GuineaPig' + index"
@@ -65,17 +64,16 @@ export default {
     mounted() {
         setInterval(() => {
             this.imageChainPos -= 0.5;
-        }, 15);
+        }, 5);
         setInterval(() => {
             for (let i = 0; i < this.imageChain.length; i++) {
                 const element = this.$refs['GuineaPig' + i][0].getBoundingClientRect();
                 const section = this.$refs.section3.getBoundingClientRect();
-
                 if (element.top + element.height < section.top) {
                     const currentMargin = parseInt(
                         window.getComputedStyle(this.$refs.imageChain).getPropertyValue('margin-top')
                     );
-                    this.$refs.imageChain.style.marginTop = currentMargin + 300 + 'px';
+                    this.$refs.imageChain.style.marginTop = currentMargin + element.height + 'px';
                     this.imageChain.push(this.imageChain.shift());
                 }
             }
@@ -97,21 +95,21 @@ export default {
             imageChainPos: 0,
             progressHeight: 0,
             imageChain: [
-                'Guineapig-1.jpg',
-                'Guineapig-2.jpg',
-                'Guineapig-3.jpg',
-                'Guineapig-4.jpg',
-                'Guineapig-5.jpg',
-                'Guineapig-6.jpg',
-                'Guineapig-8.jpg',
-                'Guineapig-9.jpg',
-                'Guineapig-10.jpg',
-                'Guineapig-11.jpg',
-                'Guineapig-12.jpg',
-                'Guineapig-13.jpg',
-                'Guineapig-14.jpg',
-                'Guineapig-15.jpg',
-                'Guineapig-16.jpg'
+                '1.png',
+                '2.png',
+                '3.png',
+                '4.png',
+                '5.png',
+                '6.png',
+                '7.png',
+                '8.png',
+                '9.png',
+                '10.png',
+                '11.jpg',
+                '12.jpg',
+                '13.jpg',
+                '14.jpg',
+                'jamesavatar.jpg'
             ],
             roadmap: [
                 {
@@ -137,7 +135,7 @@ export default {
                     reached: false,
                     description:
                         'You have been invited to the party of the century. Grab your Guinea Pig and their favourite outfit and prepare to get downand boogie.'
-                },
+                }
             ]
         };
     }
@@ -153,7 +151,7 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
     padding-bottom: 300px;
 
     .image-chain {
@@ -161,7 +159,6 @@ export default {
         display: flex;
         flex-direction: column;
         top: -100px;
-        right: 100px;
 
         img {
             height: 300px;
@@ -171,74 +168,254 @@ export default {
         display: flex;
         position: relative;
         z-index: 5;
-        justify-content: flex-start;
-        align-items: flex-start;
+
         flex-direction: column;
-        width: 1500px;
+    }
 
-        .progress-bar {
-            position: absolute;
-            height: 100%;
-            width: 10px;
-            top: 0;
-            left: 74px;
-            z-index: 2;
-            background: var(--sub-foreground-color);
+    @include breakpoint(mobileonly) {
+        .roadmap {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            .roadmap-title {
+                width: 300px;
+                margin-top: 100px;
+                justify-self: flex-end;
+                align-self: center;
+                h2 {
+                    color: var(--button-color);
+                    font-size: 55pt;
+                    line-height: 80px;
+                }
 
-            .circle {
-                height: 100px;
-                width: 100px;
-                position: absolute;
-                top: 98%;
-                left: -45px;
-                border-radius: 100px;
-                background: var(--sub-foreground-color);
+                p {
+                    margin-top: 25px;
+                    color: var(--offset-white);
+                }
             }
         }
-        .progress-bar-green {
-            position: absolute;
-            height: 100%;
-            width: 10px;
-            top: 0;
-            left: 74px;
-            z-index: 4;
-            background: var(--button-color);
+        .image-chain {
+            opacity: 0;
         }
-        .roadmap-title {
-            width: 600px;
+        .roadmap-item {
             margin-top: 100px;
-            justify-self: center;
-            align-self: center;
-            h2 {
-                color: var(--button-color);
-                font-size: 55pt;
-                line-height: 80px;
+            position: relative;
+            width: 80%;
+            z-index: 5;
+            height: 100%;
+        }
+
+        .roadmap-end {
+            height: 300px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            width: 100%;
+            .title {
+                @include FS_Super_Bold;
+
+                font-size: 25pt;
+            }
+        }
+    }
+    @include breakpoint(tablet) {
+        .roadmap {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            .roadmap-title {
+                width: 500px;
+                margin-top: 100px;
+                justify-self: center;
+                align-self: center;
+                h2 {
+                    color: var(--button-color);
+                    font-size: 55pt;
+                    line-height: 80px;
+                }
+
+                p {
+                    margin-top: 25px;
+                    color: var(--offset-white);
+                }
+            }
+        }
+        .image-chain {
+            opacity: 0;
+        }
+        .roadmap-item {
+            margin-top: 100px;
+            position: relative;
+            width: 90%;
+            z-index: 5;
+        }
+        .roadmap-end {
+            height: 300px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            width: 100%;
+            .title {
+                @include FS_Super_Bold;
+
+                font-size: 25pt;
+            }
+        }
+    }
+    @include breakpoint(phablet) {
+        .roadmap {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            .roadmap-title {
+                width: 500px;
+                margin-top: 100px;
+                justify-self: flex-end;
+                align-self: center;
+                h2 {
+                    color: var(--button-color);
+                    font-size: 55pt;
+                    line-height: 80px;
+                }
+
+                p {
+                    margin-top: 25px;
+                    color: var(--offset-white);
+                }
+            }
+        }
+        .image-chain {
+            opacity: 0;
+        }
+        .roadmap-item {
+            margin-top: 100px;
+            position: relative;
+            width: 80%;
+            z-index: 5;
+            height: 100%;
+        }
+
+        .roadmap-end {
+            height: 300px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            width: 100%;
+            .title {
+                @include FS_Super_Bold;
+
+                font-size: 25pt;
+            }
+        }
+    }
+
+    @include breakpoint(laptop) {
+        .roadmap {
+            width: 1000px;
+            justify-content: flex-start;
+            align-items: flex-start;
+            .roadmap-title {
+                width: 500px;
+                margin-top: 100px;
+                justify-self: center;
+                align-self: center;
+                h2 {
+                    color: var(--button-color);
+                    font-size: 55pt;
+                    line-height: 80px;
+                }
+
+                p {
+                    margin-top: 25px;
+                    color: var(--offset-white);
+                }
             }
 
-            p {
-                margin-top: 25px;
-                color: var(--offset-white);
+            .progress-bar {
+                position: absolute;
+                height: 100%;
+                width: 10px;
+                top: 0;
+                left: 74px;
+                z-index: 2;
+                background: var(--sub-foreground-color);
+
+                .circle {
+                    height: 100px;
+                    width: 100px;
+                    position: absolute;
+                    top: 96%;
+                    left: -45px;
+                    border-radius: 100px;
+                    background: var(--sub-foreground-color);
+                }
+            }
+            .progress-bar-green {
+                position: absolute;
+                height: 100%;
+                width: 10px;
+                top: 0;
+                left: 74px;
+                z-index: 4;
+                background: var(--button-color);
+            }
+        }
+        .image-chain {
+            opacity: 1;
+            right: 50px;
+            img {
+                height: 200px;
             }
         }
         .roadmap-item {
             margin-top: 100px;
-            position: relative; 
+            position: relative;
             width: 70%;
             z-index: 5;
         }
-    }
 
-    .roadmap-end {
-        height: 300px;
-        position: relative;
-        display: flex;
-        margin-left: 200px;
-        align-items: flex-end;
-        width: 100%;
-        .title {
+        .roadmap-end {
+            height: 300px;
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            margin-left: 150px;
+            align-items: flex-end;
+            width: 100%;
             @include FS_Super_Bold;
-
+            width: 500px;
             font-size: 25pt;
+        }
+    }
+    @include breakpoint(desktop) {
+        .roadmap {
+            width: 1500px;
+
+            .roadmap-title {
+                width: 600px;
+                margin-top: 100px;
+                justify-self: center;
+                align-self: center;
+                h2 {
+                    color: var(--button-color);
+                    font-size: 55pt;
+                    line-height: 80px;
+                }
+
+                p {
+                    margin-top: 25px;
+                    color: var(--offset-white);
+                }
+            }
+        }
+        .image-chain {
+            opacity: 1;
+            right: 50px;
+            img {
+                height: 300px;
+            }
         }
     }
 }

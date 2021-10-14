@@ -4,13 +4,10 @@
             <div class="content-container">
                 <div class="info">
                     <div class="text">
-                        <h2>
-                            Join the <span>community</span> and prepare<br />
-                            for the party
-                        </h2>
+                        <h2>Join the <span>community</span> and prepare for the party</h2>
                         <p class="sub-title">
-                            You have been invited to the party of the century. Grab your <br />
-                            Guinea Pig and their favourite outfit and prepare to get down and boogie.
+                            You have been invited to the party of the century. Grab your Guinea Pig and their
+                            favourite outfit and prepare to get down and boogie.
                         </p>
                     </div>
                     <a href="https://discord.gg/bT9q7r2vaT" target="_blank"
@@ -19,10 +16,7 @@
                 </div>
             </div>
         </div>
-        <img class="image-1" src="@/assets/img/sushi_no_bg.png" />
-        <img class="image-3" src="@/assets/img/king_no_bg.png" />
-        <img class="image-4" src="@/assets/img/hoody_no_bg.png" />
-        <img class="image-2" src="@/assets/img/warrior_no_bg.png" />
+        <side3 class="side3" />
     </div>
 </template>
 
@@ -34,6 +28,7 @@ import { mapGetters } from 'vuex';
 import web3 from 'Web3';
 import Box from '@/components/generics/Box.vue';
 import Button from '@/components/generics/Button.vue';
+import side3 from '@/assets/svg/Guineapig-side3.svg';
 
 // import Button from '@/components/generics/Button.vue';
 export default {
@@ -45,7 +40,8 @@ export default {
         ...mapActions(['TOKENS_balanceOf'])
     },
     components: {
-        Button
+        Button,
+        side3
     }
 };
 </script>
@@ -59,6 +55,7 @@ export default {
     align-items: center;
     justify-content: center;
     z-index: 5;
+    height: 100%;
     width: 100%;
     padding-bottom: 150px;
     flex-direction: column;
@@ -107,38 +104,111 @@ export default {
         }
     }
 
-    .image-1,
-    .image-2,
-    .image-4,
-    .image-3 {
+    .side3 {
         position: absolute;
-        transform: scaleX(-1);
-    }
-
-    .image-1 {
-        height: 800px;
-        right: -200px;
-        top: -500px;
-    }
-
-    .image-2 {
-        height: 1300px;
+        height: 1100px;
         right: -250px;
-        bottom: -500px;
-    }
-
-    .image-3 {
-        height: 900px;
-        right: -200px;
-        bottom: 300px;
-    }
-    .image-4 {
-        height: 1000px;
-        right: -200px;
-        bottom: 0px;
+        bottom: -30px;
     }
     section {
         background: white;
+    }
+
+    @include breakpoint(mobileonly) {
+        .section-content {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            .content-container {
+                h2 {
+                    font-size: 47pt;
+                }
+                .info {
+                    width: 350px;
+                    margin-left: 50px;
+                    text-align: center;
+                }
+            }
+        }
+        .side3 {
+            opacity: 0;
+            z-index: -5000;
+        }
+    }
+    @include breakpoint(tablet) {
+        .section-content {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            .content-container {
+                .info {
+                    width: 800px;
+                    margin-left: 50px;
+                    text-align: center;
+                }
+            }
+        }
+        .side3 {
+            opacity: 0;
+            z-index: -5000;
+        }
+    }
+    @include breakpoint(phablet) {
+        .section-content {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            .content-container {
+                .info {
+                    width: 500px;
+                    margin-left: 50px;
+                    text-align: center;
+                }
+            }
+        }
+        .side3 {
+            opacity: 0;
+            z-index: -5000;
+        }
+    }
+
+    @include breakpoint(laptop) {
+        .section-content {
+            width: 1000px;
+
+            .content-container {
+                .info {
+                    width: 666px;
+                    margin-left: 0;
+                }
+            }
+        }
+        .side3 {
+            position: absolute;
+            height: 1000px;
+            right: -250px;
+            bottom: -30px;
+        }
+    }
+    @include breakpoint(desktop) {
+        .section-content {
+            width: 1500px;
+
+            .content-container {
+                .info {
+                    width: 1000px;
+                    margin-left: 0;
+                }
+            }
+        }
+        .side3 {
+            position: absolute;
+            height: 1100px;
+            right: -250px;
+            bottom: -30px;
+        }
     }
 }
 </style>

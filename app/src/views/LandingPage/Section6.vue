@@ -5,7 +5,7 @@
                 <div class="info">
                     <div class="logo-subtitle">
                         <div class="logo-container">
-                            <h2>G.P <img class="image-4" src="@/assets/img/hoody_no_bg.png" /> C.P</h2>
+                            <h2>G.P <sushi class="image-4" /> C.P</h2>
                         </div>
                         <p>5,555 unique and wonderful pigs</p>
                     </div>
@@ -15,8 +15,10 @@
             <div class="nav-container">
                 <div class="nav">
                     <opensea class="social-media" />
-                    <discord class="social-media" />
-                    <twitter class="social-media" />
+                    <a href="https://discord.gg/bT9q7r2vaT" target="_blank"
+                        ><discord class="social-media"
+                    /></a>
+                    <a href="https://twitter.com/GPCP_community"><twitter class="social-media"/></a>
                 </div>
             </div>
         </div>
@@ -34,6 +36,8 @@ import Button from '@/components/generics/Button.vue';
 import opensea from '@/assets/svg/opensea.svg';
 import twitter from '@/assets/svg/twitter.svg';
 import discord from '@/assets/svg/discord.svg';
+import sushi from '@/assets/svg/sushi.svg';
+
 // import Button from '@/components/generics/Button.vue';
 export default {
     name: 'Section6',
@@ -46,7 +50,8 @@ export default {
     components: {
         opensea,
         twitter,
-        discord
+        discord,
+        sushi
     }
 };
 </script>
@@ -63,9 +68,14 @@ export default {
     width: 100%;
     padding-bottom: 50px;
     flex-direction: column;
+
+    .image-4 {
+        height: 50px;
+        width: 30px;
+    }
     .section-content {
         width: 1500px;
-        height: 400px;
+        height: 200px;
         margin-top: 50px;
         display: flex;
         justify-content: space-between;
@@ -124,7 +134,6 @@ export default {
                     }
                     h2 {
                         font-size: 26pt;
-                        line-height: 20px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -132,6 +141,7 @@ export default {
                 }
                 p {
                     color: var(--offset-white);
+                    margin-top: 0;
                     font-weight: 400;
                 }
                 .text {

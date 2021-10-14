@@ -7,8 +7,8 @@
                         THE TEAM
                     </h2>
                     <p class="sub-title">
-                        We have a dedicated team bringing your the cutest and chunkiest<br />
-                        Guinea Pigs available today!
+                        We have a dedicated team bringing your the cutest and chunkiest Guinea Pigs available
+                        today! Get in touch with us on Discord!
                     </p>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                     <img :src="require(`@/assets/img/` + item.image)" />
                     <div class="name-info">
                         <h3>{{ item.name }}</h3>
-                        <twitter />
+                        <a href="https://twitter.com/mr_nft1"><twitter class="twitter-logo"/></a>
                     </div>
                 </div>
             </div>
@@ -43,22 +43,22 @@ export default {
                 {
                     name: 'James',
                     twitter: 'www.twitter.com',
-                    image: 'james-guineapig.png'
+                    image: 'jamesavatar.jpg'
                 },
                 {
                     name: 'Rami',
                     twitter: 'www.twitter.com',
-                    image: 'Guineapig-1.jpg'
+                    image: '6.png'
                 },
                 {
                     name: 'Andrew',
                     twitter: 'www.twitter.com',
-                    image: 'Guineapig-2.jpg'
+                    image: '4.png'
                 },
                 {
                     name: 'Gareth',
                     twitter: 'www.twitter.com',
-                    image: 'Guineapig-3.jpg'
+                    image: '8.png'
                 }
             ]
         };
@@ -87,18 +87,26 @@ export default {
     width: 100%;
     padding-bottom: 150px;
     flex-direction: column;
+
+    .twitter-logo {
+        &:hover {
+            cursor: pointer;
+            path {
+                fill: var(--button-color);
+            }
+        }
+    }
     .section-content {
-        width: 1500px;
         margin-top: 200px;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         flex-direction: column;
         .info {
             display: flex;
             flex-direction: column;
             height: 100%;
-            text-align: left;
+            text-align: center;
             justify-content: space-between;
 
             .text {
@@ -113,21 +121,20 @@ export default {
         .team {
             display: grid;
             margin-top: 100px;
-            width: 100%;
             grid-gap: 50px 100px;
             align-items: center;
             justify-content: center;
-            grid-template-columns: repeat(3, 1fr);
             .item {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
 
                 img {
                     height: 300px;
                     width: 300px;
                 }
                 .name-info {
-                    margin-top:10px;
+                    margin-top: 10px;
                     width: 300px;
                     display: flex;
                     justify-content: space-between;
@@ -155,6 +162,93 @@ export default {
     }
     section {
         background: white;
+    }
+
+    @include breakpoint(mobileonly) {
+        .section-content {
+            width: 400px;
+
+            .team {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    }
+    @include breakpoint(tablet) {
+        .section-content {
+            width: 700px;
+
+            .team {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+    @include breakpoint(phablet) {
+        .section-content {
+            width: 100%;
+
+            .team {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    }
+
+    @include breakpoint(laptop) {
+        .section-content {
+            width: 1000px;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                text-align: center;
+                justify-content: space-between;
+
+                .text {
+                    display: flex;
+                    flex-direction: column;
+                }
+                p {
+                    color: white;
+                }
+            }
+            .team {
+                grid-template-columns: repeat(2, 1fr);
+                width: 100%;
+                .item {
+                }
+            }
+        }
+    }
+    @include breakpoint(desktop) {
+        .section-content {
+            width: 1500px;
+
+            text-align: center;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                text-align: center;
+                justify-content: space-between;
+
+                .text {
+                    display: flex;
+                    flex-direction: column;
+                }
+                p {
+                    color: white;
+                }
+            }
+            .team {
+                grid-template-columns: repeat(3, 1fr);
+                width: 100%;
+
+                .item {
+                    align-items: center;
+                }
+            }
+        }
     }
 }
 </style>
