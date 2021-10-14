@@ -30,14 +30,14 @@ export default class PriceView extends Vue {}
     .title {
         text-align: left;
         z-index: 1;
-        @include DS_Bold;
+        @include FS_Bold;
     }
     .price {
         text-align: left;
         margin-top: 20px;
         z-index: 1;
 
-        @include DS_Bold;
+        @include FS_Bold;
         font-size: var(--lg-font);
         color: var(--button-color);
     }

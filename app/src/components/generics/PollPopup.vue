@@ -112,7 +112,7 @@ export default class Poll extends Vue {}
     border: 2px solid var(--bg-color);
     transition: 0.2s;
     a {
-        @include DS_Bold;
+        @include FS_Bold;
         color: var(--button-color);
     }
     .vote-stats {
@@ -124,7 +124,7 @@ export default class Poll extends Vue {}
 
             display: flex;
             justify-content: space-evenly;
-            @include DS_Bold;
+            @include FS_Bold;
             font-size: var(--lg-font);
         }
         .finish-date {
@@ -196,7 +196,7 @@ export default class Poll extends Vue {}
         }
         .titles {
             height: 40px;
-            @include DS_Bold;
+            @include FS_Bold;
             font-size: var(--md-font);
             text-align: center;
 
@@ -220,18 +220,18 @@ export default class Poll extends Vue {}
                 font-size: var(--sm-font);
                 text-transform: uppercase;
                 text-align: center;
-                @include DS_Medium;
+                @include FS_Medium;
             }
 
             .amount {
                 text-align: right;
-                @include DS_Medium;
+                @include FS_Medium;
             }
         }
     }
     .description {
         text-align: left;
-        @include DS_Light;
+        @include FS_Light;
         margin-top: 25px;
         line-height: 25px;
     }
@@ -242,18 +242,18 @@ export default class Poll extends Vue {}
         margin-bottom: 40px;
         .title {
             text-align: left;
-            @include DS_Bold;
+            @include FS_Bold;
             font-size: var(--lg-font);
         }
     }
     .info-set {
         display: flex;
         flex-direction: column;
-        @include DS_Light;
+        @include FS_Light;
         margin-top: 20px;
         text-align: left;
         .label {
-            @include DS_Bold;
+            @include FS_Bold;
         }
         .content {
             margin-top: 10px;
@@ -262,7 +262,7 @@ export default class Poll extends Vue {}
     .status {
         width: 100px;
         text-align: right;
-        @include DS_Bold;
+        @include FS_Bold;
         font-size: var(--md-font);
     }
 

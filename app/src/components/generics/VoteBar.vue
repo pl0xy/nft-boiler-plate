@@ -67,7 +67,7 @@ export default {
     text-transform: uppercase;
     font-size: var(--sm-font);
     width: 100%;
-    @include DS_Light;
+    @include FS_Light;
     .threshold {
         position: absolute;
         left: 4%;
@@ -84,7 +84,7 @@ export default {
         top: 50px;
         transition: 0.2s ease-out;
         color: var(--button-color);
-        @include DS_Bold;
+        @include FS_Bold;
     }
     .threshold::before {
         content: 'Quorum';

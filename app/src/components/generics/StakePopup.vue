@@ -105,7 +105,7 @@ export default class StakeAsset extends Vue {}
     align-items: center;
 
     .title {
-        @include DS_Bold;
+        @include FS_Bold;
         margin-bottom: 10px;
     }
 }

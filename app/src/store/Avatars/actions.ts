@@ -13,7 +13,7 @@ export const actions: ActionTree<Avatars, RootState> = {
             context.commit('SET_AVATAR_BALANCE', { address: payload.address, balance });
 
         } catch (err: any) {
-            context.dispatch('setError', err)
+            console.log(err);
         }
     },
     async AVATARS_setup(context: ActionContext<Avatars, RootState>) {
@@ -30,7 +30,7 @@ export const actions: ActionTree<Avatars, RootState> = {
             }
 
         } catch (err: any) {
-            context.dispatch('setError', err)
+            console.log(err);
         }
     },
     async AVATARS_tokenOfOwnerByIndex(context: ActionContext<Avatars, RootState>, payload: { address: string, indexes: string[] }) {
@@ -49,7 +49,7 @@ export const actions: ActionTree<Avatars, RootState> = {
             }
 
         } catch (err: any) {
-            context.dispatch('setError', err)
+            console.log(err);
         }
     },
     async AVATARS_buy(context: ActionContext<Avatars, RootState>) {
@@ -61,7 +61,7 @@ export const actions: ActionTree<Avatars, RootState> = {
             await context.dispatch('AVATARS_setup');
 
         } catch (err: any) {
-            context.dispatch('setError', err)
+            console.log(err);
         }
     },
     async AVATARS_buyMulti(context: ActionContext<Avatars, RootState>, payload: { amount: string }) {
@@ -69,17 +69,20 @@ export const actions: ActionTree<Avatars, RootState> = {
         try {
             await Avatars.methods
                 .buyMulti(payload.amount).call({ from: Address });
+
         } catch (err: any) {
-            context.dispatch('setError', err)
+            console.log(err);
         }
     },
     async AVATARS_claim(context: ActionContext<Avatars, RootState>, payload: { tokenID: string }) {
         const { Avatars, Address } = context.getters;
+        console.log('here');
         try {
             await Avatars.methods
-                .claim(payload.tokenID).call({ from: Address });
+                .claim(payload.tokenID).send({ from: Address });
+            console.log('here2');
         } catch (err: any) {
-            context.dispatch('setError', err)
+            console.log(err);
         }
     },
     async AVATARS_claimMulti(context: ActionContext<Avatars, RootState>, payload: { tokenIDs: string[] }) {
@@ -88,7 +91,7 @@ export const actions: ActionTree<Avatars, RootState> = {
             await Avatars.methods
                 .claimMulti(payload.tokenIDs).call({ from: Address });
         } catch (err: any) {
-            context.dispatch('setError', err)
+            console.log(err);
         }
     },
     async AVATARS_pendingRoyalties(context: ActionContext<Avatars, RootState>, payload: { tokenID: string }) {
@@ -98,10 +101,8 @@ export const actions: ActionTree<Avatars, RootState> = {
                 .pendingRoyalties(payload.tokenID).call({ from: Address });
 
             context.commit('SET_PENDING_ROYALTIES', { tokenID: payload.tokenID, pendingRoyalties });
-
-
         } catch (err: any) {
-            context.dispatch('setError', err)
+            console.log(err);
         }
     },
 

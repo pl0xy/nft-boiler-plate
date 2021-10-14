@@ -54,6 +54,6 @@ export default class StandardInput extends Vue {}
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    @include DS_Bold;
+    @include FS_Bold;
 }
 </style>

@@ -86,7 +86,7 @@ export default class PaneledBox extends Vue {}
             align-items: center;
             justify-content: center;
             font-size: var(--lg-font);
-            @include DS_Bold;
+            @include FS_Bold;
             font-weight: 700;
             color: var(--main-font);
         }

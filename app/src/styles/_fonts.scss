@@ -12,86 +12,85 @@ $xlg-font: 20pt;
     --md-font: #{$md-font};
     --lg-font: #{$lg-font};
     --xlg-font: #{$xlg-font};
-
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@0,400;0,700&display=swap');
 @import url("https://use.typekit.net/qnz1vyv.css");
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&display=swap');
 
 $base-size: 5;
-$DS_light: 'Davis Sans Light';
-$DS_Light_Italic: 'Davis Sans Light Italic';
-$DS_Medium: 'Davis Sans Medium';
-$DS_Medium_Italic: 'Davis Sans Medium Italic';
-$DS_Regular: 'Davis Sans Regular';
-$DS_Bold: 'Davis Sans Bold';
-$DS_Bold_Italic: 'Davis Sans Bold Italic';
+$FS_light: 'Davis Sans Light';
+$FS_Light_Italic: 'Davis Sans Light Italic';
+$FS_Medium: 'Davis Sans Medium';
+$FS_Medium_Italic: 'Davis Sans Medium Italic';
+$FS_Regular: 'Davis Sans Regular';
+$FS_Bold: 'Davis Sans Bold';
+$FS_Bold_Italic: 'Davis Sans Bold Italic';
 
-@mixin DS_Light {
-    font-family: davis-sans,
-        sans-serif;
+@mixin FS_Light {
+    font-family: 'Fira Sans', sans-serif;
 
     font-weight: 300;
 
     font-style: normal;
 }
 
-@mixin DS_Light_Italic {
-    font-family: davis-sans,
-        sans-serif;
+@mixin FS_Light_Italic {
+    font-family: 'Fira Sans', sans-serif;
 
     font-weight: 300;
 
     font-style: italic;
 }
 
-@mixin DS_Italic {
-    font-family: davis-sans,
-        sans-serif;
+@mixin FS_Italic {
+    font-family: 'Fira Sans', sans-serif;
 
     font-weight: 400;
 
     font-style: italic;
 }
 
-@mixin DS_Medium {
-    font-family: davis-sans,
-        sans-serif;
+@mixin FS_Medium {
+    font-family: 'Fira Sans', sans-serif;
 
     font-weight: 500;
 
     font-style: normal;
 }
 
-@mixin DS_Regular {
-    font-family: davis-sans,
-        sans-serif;
+@mixin FS_Regular {
+    font-family: 'Fira Sans', sans-serif;
 
     font-weight: 400;
 
     font-style: normal;
 }
 
-@mixin DS_Medium_Italic {
-    font-family: davis-sans,
-        sans-serif;
+@mixin FS_Medium_Italic {
+    font-family: 'Fira Sans', sans-serif;
 
     font-weight: 500;
 
     font-style: italic;
 }
 
-@mixin DS_Bold {
-    font-family: davis-sans,
-        sans-serif;
+@mixin FS_Bold {
+    font-family: 'Fira Sans', sans-serif;
 
     font-weight: 700;
 
     font-style: normal;
 }
+@mixin FS_Super_Bold {
+    font-family: 'Fira Sans', sans-serif;
 
-@mixin DS_Bold_Italic {
-    font-family: davis-sans,
-        sans-serif;
+    font-weight: 900;
+
+    font-style: normal;
+}
+
+@mixin FS_Bold_Italic {
+    font-family: 'Fira Sans', sans-serif;
 
     font-weight: 700;
 
@@ -100,5 +99,12 @@ $DS_Bold_Italic: 'Davis Sans Bold Italic';
 
 
 html {
-    @include DS_Regular;
+    @include FS_Regular;
+}
+
+p {
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 30px;
+    color: white;
+    font-size: 16pt;
 }
