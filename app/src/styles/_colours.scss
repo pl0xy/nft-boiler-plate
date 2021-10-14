@@ -1,15 +1,16 @@
-$main-font: #141e27;
-$main-secondary: #aab8c1;
-$offset-white: #ebebeb;
+$main-font: #ffffff;
+$main-secondary: #51536B;
+$offset-white: #78788d;
 $main-black: #141414;
 $background-color: #070a0e;
-$bg-color: #f2f7fd;
-$foreground-color: #ffffff;
-$sub-foreground-color: #f3f7fa;
-$button-color: #2eb878;
+$bg-color: #080919;
+$foreground-color: #0E152D;
+$sub-foreground-color: #1f273f;
+$button-color: #00FFCB;
 $warning-color: #ffd166;
 $danger-color: #ef476f;
 $brown-color: #805120;
+
 
 :root {
     // RIGHT, will work in all Sass versions.

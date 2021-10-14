@@ -48,7 +48,7 @@ export default class Box extends Vue {}
             height: 60px;
             display: flex;
             align-items: center;
-            @include DS_Bold;
+            @include FS_Bold;
 
             justify-content: center;
             font-size: var(--lg-font);

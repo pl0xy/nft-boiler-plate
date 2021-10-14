@@ -76,7 +76,7 @@ export default {
     color: var(--main-secondary);
     text-transform: uppercase;
     font-size: var(--sm-font);
-    @include DS_Light;
+    @include FS_Light;
     .min-collateral {
         position: absolute;
         left: 50%;
@@ -104,7 +104,7 @@ export default {
         top: 50px;
         transition: 0.2s ease-out;
         color: var(--button-color);
-        @include DS_Bold;
+        @include FS_Bold;
     }
     .recommended-collateral::before {
         content: '200%';

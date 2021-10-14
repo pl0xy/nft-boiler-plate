@@ -1,6 +1,5 @@
 <template>
     <div id="app">
-        <Header />
         <router-view />
         <Modal v-if="ShowModal" @close="UIM_closeModal" />
     </div>
@@ -16,8 +15,7 @@ export default {
         ...mapGetters(['ShowModal'])
     },
     components: {
-        Modal,
-        Header
+        Modal
     },
     methods: {
         ...mapActions(['setAddress', 'bootstrapContracts'])
@@ -51,11 +49,4 @@ export default {
     /* So the width will be 100% + 17px */
 }
 
-.background {
-    position: fixed;
-    top: 0;
-    left: -1px;
-    width: 102vw;
-    z-index: -100;
-}
 </style>

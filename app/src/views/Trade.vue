@@ -11,8 +11,9 @@
         <div class="bean-grid">
             <Box v-for="(item, index) in AVATARS_getTokens" :key="index" :boxName="index">
                 <div slot="boxContent">
-                    {{ item.key }}
+
                     <h2>ETH: {{ item.pendingRoyalties | fromWeiToReadable }}</h2>
+                    <Button buttonStyle="primary" @clicked="claim(index)" title="CLAIM"></Button>
                 </div>
             </Box>
         </div>
@@ -37,13 +38,17 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['AVATARS_getBalance', 'Address', 'AVATARS_getTokens']),
+        ...mapGetters(['AVATARS_getBalance', 'Address', 'AVATARS_getTokens', 'AVATARS_getPendingRoyalties']),
         balance() {
             return this.AVATARS_getBalance.length ? new Array(parseInt(this.AVATARS_getBalance)) : [];
         }
     },
     methods: {
-        ...mapActions(['AVATARS_buy', 'AVATARS_tokenOfOwnerByIndex'])
+        ...mapActions(['AVATARS_buy', 'AVATARS_tokenOfOwnerByIndex', 'AVATARS_claim']),
+        async claim(tokenID: string) {
+            console.log(tokenID);
+            await this.AVATARS_claim({tokenID});
+        }
     },
     components: {
         Box,

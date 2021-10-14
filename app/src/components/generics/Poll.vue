@@ -85,7 +85,7 @@ export default class Poll extends Vue {}
             width: 100px;
             display: flex;
             justify-content: space-between;
-            @include DS_Bold;
+            @include FS_Bold;
             font-size: var(--sm-font);
         }
         .finish-date {
@@ -101,12 +101,12 @@ export default class Poll extends Vue {}
     }
     .title {
         text-align: left;
-        @include DS_Bold;
+        @include FS_Bold;
     }
     .status {
         width: 100px;
         text-align: right;
-        @include DS_Bold;
+        @include FS_Bold;
         font-size: var(--md-font);
     }
     &:hover {

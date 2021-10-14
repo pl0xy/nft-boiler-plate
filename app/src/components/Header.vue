@@ -1,12 +1,13 @@
 <template>
-    <header class="header">
+    <header class="header-nav">
         <div class="content">
             <div class="logo-container">
-                <h2>Test<span class="dot">.</span></h2>
+                <h2>G.P <img src="@/assets/img/hoody_no_bg.png" /> C.P</h2>
             </div>
             <div class="nav">
-                <router-link to="/">Home</router-link>
-                <router-link to="/map">Map</router-link>
+                <opensea class="social-media" />
+                <a href="https://discord.gg/bT9q7r2vaT" target="_blank"><discord class="social-media"/></a>
+                <a href=""><twitter class="social-media"/></a>
                 <button v-if="Address == emptyAddress" class="connect" @click="connectWallet()">
                     Connect
                 </button>
@@ -24,11 +25,17 @@ import { mapGetters, mapActions } from 'vuex';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import DepositForm from '@/components/forms/DepositForm.vue';
 import Button from '@/components/generics/Button.vue';
+import opensea from '@/assets/svg/opensea.svg';
+import twitter from '@/assets/svg/twitter.svg';
+import discord from '@/assets/svg/discord.svg';
 
 @Component({
     components: {
         DepositForm,
-        Button
+        Button,
+        opensea,
+        twitter,
+        discord
     },
     methods: {
         ...mapActions(['bootstrapContracts']),
@@ -53,13 +60,10 @@ export default class Header extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.header {
-    width: 100vw;
-    height: auto;
-    position: fixed;
-    z-index: 10;
-    position: relative;
-
+.header-nav {
+    width: 100%;
+    height: 100px;
+    display: flex;
     .balance-wallet {
         position: absolute;
         right: 300px;
@@ -80,7 +84,7 @@ export default class Header extends Vue {
     }
 
     h2 {
-        font-size: 20pt;
+        font-size: 26pt;
         .dot {
             color: var(--button-color);
         }
@@ -90,24 +94,26 @@ export default class Header extends Vue {
     }
 
     .content {
-        padding: 0 300px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: relative;
-        z-index: 10;
-        background-color: var(--foreground-color);
+        width: inherit;
         top: 0;
-        -webkit-box-shadow: -1px 10px 5px -4px rgba(0, 0, 0, 0.05);
-        -moz-box-shadow: -1px 10px 5px -4px rgba(0, 0, 0, 0.05);
-        box-shadow: -1px 10px 5px -4px rgba(0, 0, 0, 0.05);
 
         .logo-container {
             display: flex;
+            margin-left: 300px;
             justify-content: center;
-            align-items: flex-end;
+            align-items: center;
+
+            img {
+                height: 50px;
+            }
             h2 {
                 line-height: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
         .logo {
@@ -120,6 +126,21 @@ export default class Header extends Vue {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-right: 300px;
+
+            .social-media {
+                padding: 5px;
+                height: 35px;
+                width: 35px;
+                margin-right: 40px;
+
+                &:hover {
+                    cursor: pointer;
+                    path {
+                        fill: var(--button-color);
+                    }
+                }
+            }
         }
         .connect,
         .address {
@@ -160,17 +181,7 @@ export default class Header extends Vue {
             padding: 0 10px;
             padding-top: 9px;
             justify-content: center;
-            border-bottom: 9px solid var(--foreground-color);
-            &.router-link-exact-active {
-                color: var(--main-font);
-            }
-
-            &:hover,
-            &:active,
-            &:focus {
-                color: var(--main-font);
-                border-bottom: 9px solid var(--button-color);
-            }
+         
         }
     }
 }

@@ -17,6 +17,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles';
 .button {
     margin: 40px 0 10px 0;
     width: 100%;
@@ -25,11 +26,12 @@ export default {
     border-radius: 12px;
     background: var(--button-color);
     transition: 0.2s;
-    font-size: var(--md-font);
-    font-weight: 700;
+    @include FS_Super_Bold;
+    font-size: 24pt;
     outline: none;
     &:hover {
         cursor: pointer;
+        transform: translateY(-10px);
     }
 }
 

@@ -104,7 +104,7 @@ export default class StandardInput extends Vue {}
         align-items: center;
         justify-content: center;
         font-weight: 700;
-        @include DS_Bold;
+        @include FS_Bold;
         &:hover {
             cursor: pointer;
         }

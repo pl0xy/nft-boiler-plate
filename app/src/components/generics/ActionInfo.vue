@@ -48,7 +48,7 @@ export default {
             font-weight: 600;
         }
         .item {
-            @include DS_Bold;
+            @include FS_Bold;
         }
     }
 }
