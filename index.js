@@ -32,8 +32,6 @@ app.use(cors({ origin: true, credentials: true }));
  * Routes Definitions
  */
 
-require('./server/routes')(app);
-
 app.use(express.static(path.join(__dirname, 'app', 'dist')));
 app.get('*', (req, res) => {
     console.log('Serve index');
