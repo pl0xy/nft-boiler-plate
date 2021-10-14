@@ -9,6 +9,10 @@ contract Avatars is ERC721Enumerable {
     uint256 private totalNFTs;
     uint256 private minShare;
     uint256 public totalRoyalties;
+
+    uint256 public nftPrice = 0.12 ether;
+    uint256 public tax = 0.0144 ether;
+
     struct Avatar {
         uint256 tokenShare;
         uint256 lastClaimPrice;
@@ -66,15 +70,15 @@ contract Avatars is ERC721Enumerable {
     }
 
     function buy() external payable returns (uint256) {
-        require(msg.value > 0.33 ether);
-        totalRoyalties += 0.0495 ether; // each purchase sends 15% of royalties to the pool
+        require(msg.value > nftPrice);
+        totalRoyalties += tax; // each purchase sends 15% of royalties to the pool
         return mint(msg.sender);
     }
 
     function buyMulti(uint256 amount) external payable {
         require(amount <= 5, 'Can only mint 5 at a time');
-        require(msg.value > uint256(0.33 ether).mul(amount));
-        totalRoyalties += uint256(0.0495 ether).mul(amount); // each purchase sends 15% of royalties to the pool
+        require(msg.value > uint256(nftPrice).mul(amount));
+        totalRoyalties += uint256(tax).mul(amount); // each purchase sends 15% of royalties to the pool
         for (uint256 i = 0; i < amount; i++) {
             mint(msg.sender);
         }
