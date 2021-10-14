@@ -42,8 +42,9 @@ export default {
         text-align: left;
 
         p {
+            margin-top: 10px;
             color: var(--offset-white);
-            font-size: 18pt;
+            font-size: 16pt;
         }
         & > div {
             display: flex;

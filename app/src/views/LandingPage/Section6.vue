@@ -25,13 +25,12 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import web3 from 'Web3';
-import Box from '@/components/generics/Box.vue';
 import Button from '@/components/generics/Button.vue';
 import opensea from '@/assets/svg/opensea.svg';
 import twitter from '@/assets/svg/twitter.svg';
@@ -159,6 +158,103 @@ export default {
 
             button {
                 width: 300px;
+            }
+        }
+    }
+    @include breakpoint(mobileonly) {
+        .section-content {
+            width: 100%;
+            flex-direction: column;
+
+            .nav-container {
+                justify-content: center;
+                align-items: center;
+            }
+            .content-container {
+                justify-content: center;
+                align-items: center;
+
+                .info {
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .logo-subtitle {
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+
+            .logo-container {
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+    @include breakpoint(tablet) {
+        .section-content {
+            width: 100%;
+            flex-direction: column;
+            .nav-container {
+                justify-content: center;
+                align-items: center;
+            }
+            .content-container {
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+    @include breakpoint(phablet) {
+        .section-content {
+            width: 100%;
+            flex-direction: column;
+            .nav-container {
+                justify-content: center;
+                align-items: center;
+            }
+            .content-container {
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+
+    @include breakpoint(laptop) {
+        .section-content {
+            width: 1000px;
+            flex-direction: row;
+            .nav-container {
+                align-items: flex-end;
+                justify-content: flex-end;
+            }
+            .content-container {
+                justify-content: center;
+                align-items: center;
+
+                .info {
+                    height: 100%;
+                }
+            }
+        }
+    }
+    @include breakpoint(desktop) {
+        .section-content {
+            width: 1500px;
+            flex-direction: row;
+            .nav-container {
+                align-items: flex-end;
+                justify-content: flex-end;
+            }
+            .content-container {
+                justify-content: center;
+                align-items: center;
+
+                .info {
+                    height: 100%;
+                }
             }
         }
     }

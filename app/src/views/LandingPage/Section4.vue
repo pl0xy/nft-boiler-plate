@@ -25,13 +25,12 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import web3 from 'Web3';
-import Box from '@/components/generics/Box.vue';
 import twitter from '@/assets/svg/twitter.svg';
 
 // import Button from '@/components/generics/Button.vue';
@@ -42,7 +41,7 @@ export default {
             team: [
                 {
                     name: 'James',
-                    twitter: 'www.twitter.com',
+                    twitter: 'www.twitter.com/mr_nft1',
                     image: 'jamesavatar.jpg'
                 },
                 {
@@ -52,7 +51,7 @@ export default {
                 },
                 {
                     name: 'Andrew',
-                    twitter: 'www.twitter.com',
+                    twitter: 'www.twitter.com/adawson111',
                     image: '4.png'
                 },
                 {
@@ -184,7 +183,7 @@ export default {
     }
     @include breakpoint(phablet) {
         .section-content {
-            width: 100%;
+            width: 450px;
 
             .team {
                 grid-template-columns: repeat(1, 1fr);

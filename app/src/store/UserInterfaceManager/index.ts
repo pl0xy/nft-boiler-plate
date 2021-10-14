@@ -15,12 +15,6 @@ export const state: UserInterfaceManager = {
     success: {
         msg: ''
     },
-    localStarPosition: {
-        quadrant: 0,
-        sector: 0,
-        district: 0,
-        star: 0
-    },
     planetDiscoveredMessage: '',
     planetDiscoveredHeader: ''
 };

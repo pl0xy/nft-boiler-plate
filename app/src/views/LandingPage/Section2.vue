@@ -7,8 +7,9 @@
                     <div class="text">
                         <h2><span>5,555</span> unique and wonderful pigs</h2>
                         <p class="sub-title">
-                            You have been invited to the party of the century. Grab your Guinea Pig and their
-                            favourite outfit and prepare to get down and boogie.
+                            There will be 5,555 invitations sent out to join the party. The guinea pigs will
+                            come sporting some of the best fashion and costumes know to the Guinea Pig World.
+                            Which one do you want?
                         </p>
                     </div>
                     <a class="discord-button" href="https://discord.gg/bT9q7r2vaT" target="_blank"
@@ -20,13 +21,12 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import web3 from 'Web3';
-import Box from '@/components/generics/Box.vue';
 import Button from '@/components/generics/Button.vue';
 
 // import Button from '@/components/generics/Button.vue';
@@ -81,6 +81,13 @@ export default {
                     width: 100%;
                 }
 
+                .text {
+                    justify-content: center;
+                    align-items: center;
+                }
+                .sub-title {
+                    width: 400px;
+                }
                 .discord-button {
                     display: flex;
                     align-items: center;
@@ -117,7 +124,13 @@ export default {
                     height: 400px;
                     width: 400px;
                 }
-
+                .text {
+                    justify-content: center;
+                    align-items: center;
+                }
+                .sub-title {
+                    width: 600px;
+                }
                 .discord-button {
                     display: flex;
                     align-items: center;
@@ -152,7 +165,13 @@ export default {
                         width: 500px;
                         margin-top: 20px;
                     }
-
+                    .text {
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .sub-title {
+                        width: 500px;
+                    }
                     p {
                         text-align: center;
                     }
@@ -186,14 +205,19 @@ export default {
                 align-items: flex-start;
                 flex-direction: row;
 
-                h2 {
-                    font-size: 50pt;
-                    text-align: left;
-                    margin: 0;
-                }
+                .text {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    h2 {
+                        font-size: 50pt;
+                        text-align: left;
+                        margin: 0;
+                    }
 
-                p {
-                    text-align: left;
+                    p {
+                        text-align: left;
+                    }
                 }
                 .guineapig-gif {
                     height: 500px;
@@ -220,6 +244,7 @@ export default {
 
                 h2 {
                     font-size: 55pt;
+                    text-align: left;
                 }
 
                 .guineapig-gif {

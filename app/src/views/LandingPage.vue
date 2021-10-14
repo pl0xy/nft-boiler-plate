@@ -9,13 +9,12 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import web3 from 'Web3';
-import Box from '@/components/generics/Box.vue';
 import Button from '@/components/generics/Button.vue';
 import Section1 from '@/views/LandingPage/Section1.vue';
 import Section2 from '@/views/LandingPage/Section2.vue';
@@ -55,7 +54,5 @@ export default {
     p {
         margin-top: 50px;
     }
-
 }
-
 </style>

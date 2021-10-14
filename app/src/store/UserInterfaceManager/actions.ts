@@ -1,4 +1,3 @@
-import { StarPosition } from './../types';
 import { ActionTree, ActionContext } from 'vuex';
 import { RootState, UserInterfaceManager, Modal } from '../types';
 export const actions: ActionTree<UserInterfaceManager, RootState> = {
@@ -30,15 +29,4 @@ export const actions: ActionTree<UserInterfaceManager, RootState> = {
         context.commit('SET_IS_LOADING', payload);
     },
 
-    UIM_setLocalStarPosition(context: ActionContext<UserInterfaceManager, RootState>, pos: StarPosition) {
-        context.commit('SET_LOCAL_STAR_POSITION', pos);
-    },
-
-    UIM_setPlanetDiscoveredUi(
-        context: ActionContext<UserInterfaceManager, RootState>,
-        payload: { header: string; message: string }
-    ) {
-        context.commit('SET_PLANET_DISCOVERED_MESSAGE', payload.message);
-        context.commit('SET_PLANET_DISCOVERED_HEADER', payload.header);
-    }
 };

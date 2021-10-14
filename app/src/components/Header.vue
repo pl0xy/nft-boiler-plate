@@ -19,23 +19,19 @@
     </header>
 </template>
 
-<script lang="ts">
+<script>
 // <div v-if="Address != emptyAddress" class="balance-wallet">
 //     <h4>SIG: {{ SIG_getBalance | fromWeiToReadable | toFixed(4) }}</h4>
 // </div>
 import { mapGetters, mapActions } from 'vuex';
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import DepositForm from '@/components/forms/DepositForm.vue';
-import Button from '@/components/generics/Button.vue';
 import opensea from '@/assets/svg/opensea.svg';
 import twitter from '@/assets/svg/twitter.svg';
 import discord from '@/assets/svg/discord.svg';
 import sushi from '@/assets/svg/sushi.svg';
 
-@Component({
+export default {
     components: {
-        DepositForm,
-        Button,
         opensea,
         twitter,
         discord,
@@ -56,10 +52,7 @@ import sushi from '@/assets/svg/sushi.svg';
             emptyAddress: '0x0000000000000000000000000000000000000000'
         };
     }
-})
-export default class Header extends Vue {
-    @Prop() private msg!: string;
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

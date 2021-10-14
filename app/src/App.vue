@@ -4,7 +4,7 @@
         <Modal v-if="ShowModal" @close="UIM_closeModal" />
     </div>
 </template>
-<script lang="ts">
+<script>
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import Modal from '@/components/generics/Modal.vue';
@@ -48,5 +48,4 @@ export default {
     box-sizing: content-box;
     /* So the width will be 100% + 17px */
 }
-
 </style>

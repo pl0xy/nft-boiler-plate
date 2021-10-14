@@ -10,15 +10,10 @@
     </transition>
 </template>
 
-<script lang="ts">
+<script>
 import { mapGetters, mapActions } from 'vuex';
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import Button from '@/components/generics/Button.vue';
-import Box from '@/components/generics/Modal.vue';
-@Component({
-    components: {
-        Button
-    },
+export default {
     computed: {
         ...mapGetters(['Modal'])
     },
@@ -40,10 +35,7 @@ import Box from '@/components/generics/Modal.vue';
                 this.UIM_closeModal();
         }
     }
-})
-export default class Modal extends Vue {
-    @Prop() private msg!: string;
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

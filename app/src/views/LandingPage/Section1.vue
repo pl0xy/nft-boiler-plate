@@ -21,13 +21,12 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import web3 from 'Web3';
-import Box from '@/components/generics/Box.vue';
 import Button from '@/components/generics/Button.vue';
 import Header from '@/components/Header.vue';
 import side1 from '@/assets/svg/Guineapig-side1.svg';

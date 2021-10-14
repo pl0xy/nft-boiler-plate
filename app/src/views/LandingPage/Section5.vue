@@ -20,13 +20,12 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import web3 from 'Web3';
-import Box from '@/components/generics/Box.vue';
 import Button from '@/components/generics/Button.vue';
 import side3 from '@/assets/svg/Guineapig-side3.svg';
 
@@ -127,14 +126,13 @@ export default {
                 }
                 .info {
                     width: 350px;
-                    margin-left: 50px;
                     text-align: center;
                 }
             }
         }
         .side3 {
-            opacity: 0;
             z-index: -5000;
+            opacity: 0;
         }
     }
     @include breakpoint(tablet) {
@@ -145,14 +143,13 @@ export default {
             .content-container {
                 .info {
                     width: 800px;
-                    margin-left: 50px;
                     text-align: center;
                 }
             }
         }
         .side3 {
-            opacity: 0;
             z-index: -5000;
+            opacity: 0;
         }
     }
     @include breakpoint(phablet) {
@@ -169,19 +166,21 @@ export default {
             }
         }
         .side3 {
-            opacity: 0;
             z-index: -5000;
+            opacity: 0;
         }
     }
 
     @include breakpoint(laptop) {
         .section-content {
             width: 1000px;
-
+            justify-content: flex-start;
+            align-items: flex-start;
             .content-container {
                 .info {
                     width: 666px;
                     margin-left: 0;
+                    text-align: left;
                 }
             }
         }
@@ -190,16 +189,20 @@ export default {
             height: 1000px;
             right: -250px;
             bottom: -30px;
+            z-index: 6;
+            opacity: 1;
         }
     }
     @include breakpoint(desktop) {
         .section-content {
-            width: 1500px;
-
+            width: 1400px;
+            justify-content: flex-start;
+            align-items: flex-start;
             .content-container {
                 .info {
                     width: 1000px;
                     margin-left: 0;
+                    text-align: left;
                 }
             }
         }
@@ -208,6 +211,7 @@ export default {
             height: 1100px;
             right: -250px;
             bottom: -30px;
+            opacity: 1;
         }
     }
 }

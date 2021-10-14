@@ -63,7 +63,7 @@ export interface UserInterfaceManager {
 export interface Modal {
     show: boolean;
     content: string;
-    type: string;
+
     data?: {
         [key: string]: string | boolean | number;
     };

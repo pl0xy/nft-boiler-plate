@@ -2,24 +2,6 @@ import { TxResult } from './../store/types';
 import * as BN from 'bignumber.js';
 export const addressZero = '0x' + '0'.repeat(40);
 export const SECONFS_IN_DAY = 86400;
-export const advanceTime = time => {
-    return new Promise((resolve, reject) => {
-        window.web3.currentProvider.send(
-            {
-                jsonrpc: '2.0',
-                method: 'evm_increaseTime',
-                params: [time],
-                id: new Date().getTime()
-            },
-            (err, result) => {
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(result);
-            }
-        );
-    });
-};
 
 export const SAT_IDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 

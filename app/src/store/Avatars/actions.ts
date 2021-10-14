@@ -12,7 +12,7 @@ export const actions: ActionTree<Avatars, RootState> = {
                 .call({ from: Address });
             context.commit('SET_AVATAR_BALANCE', { address: payload.address, balance });
 
-        } catch (err: any) {
+        } catch (err) {
             console.log(err);
         }
     },
@@ -29,7 +29,7 @@ export const actions: ActionTree<Avatars, RootState> = {
                 await context.dispatch('AVATARS_pendingRoyalties', { tokenID: Object.keys(AVATARS_getTokens)[i] });
             }
 
-        } catch (err: any) {
+        } catch (err) {
             console.log(err);
         }
     },
@@ -48,7 +48,7 @@ export const actions: ActionTree<Avatars, RootState> = {
                 context.commit('SET_AVATAR_TOKEN', { address: payload.address, index: i, token: tokens[i] });
             }
 
-        } catch (err: any) {
+        } catch (err) {
             console.log(err);
         }
     },
@@ -60,7 +60,7 @@ export const actions: ActionTree<Avatars, RootState> = {
                 .buy().send({ from: Address, value: Web3.utils.toWei('0.4', 'ether') });
             await context.dispatch('AVATARS_setup');
 
-        } catch (err: any) {
+        } catch (err) {
             console.log(err);
         }
     },
@@ -70,7 +70,7 @@ export const actions: ActionTree<Avatars, RootState> = {
             await Avatars.methods
                 .buyMulti(payload.amount).call({ from: Address });
 
-        } catch (err: any) {
+        } catch (err) {
             console.log(err);
         }
     },
@@ -81,7 +81,7 @@ export const actions: ActionTree<Avatars, RootState> = {
             await Avatars.methods
                 .claim(payload.tokenID).send({ from: Address });
             console.log('here2');
-        } catch (err: any) {
+        } catch (err) {
             console.log(err);
         }
     },
@@ -90,7 +90,7 @@ export const actions: ActionTree<Avatars, RootState> = {
         try {
             await Avatars.methods
                 .claimMulti(payload.tokenIDs).call({ from: Address });
-        } catch (err: any) {
+        } catch (err) {
             console.log(err);
         }
     },
@@ -101,7 +101,7 @@ export const actions: ActionTree<Avatars, RootState> = {
                 .pendingRoyalties(payload.tokenID).call({ from: Address });
 
             context.commit('SET_PENDING_ROYALTIES', { tokenID: payload.tokenID, pendingRoyalties });
-        } catch (err: any) {
+        } catch (err) {
             console.log(err);
         }
     },

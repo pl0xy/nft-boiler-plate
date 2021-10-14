@@ -41,7 +41,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 import { mapActions } from 'vuex';
@@ -77,17 +77,21 @@ export default {
                     this.imageChain.push(this.imageChain.shift());
                 }
             }
+            const passed = this.roadmap.filter(item => item.reached);
+            const latest = passed[passed.length - 1];
+            const index = passed.indexOf(latest);
+            const article = `article${index}`;
+            const element = this.$refs[article][0].$el;
+            const title = this.$refs.title.getBoundingClientRect();
+            const titleHeight =
+                title.height +
+                parseInt(window.getComputedStyle(this.$refs.title).getPropertyValue('margin-top')) +
+                parseInt(window.getComputedStyle(element).getPropertyValue('margin-top'));
+            var elHeight = element.offsetHeight;
+            elHeight += parseInt(window.getComputedStyle(element).getPropertyValue('margin-top'));
+            elHeight += parseInt(window.getComputedStyle(element).getPropertyValue('margin-bottom'));
+            this.progressHeight = titleHeight + elHeight * index + 'px';
         }, 1000);
-
-        const passed = this.roadmap.filter(item => item.reached);
-        const latest = passed[passed.length - 1];
-        const index = passed.indexOf(latest);
-        const article = `article${index}`;
-        const element = this.$refs[article][0].$el;
-        var elHeight = element.offsetHeight;
-        elHeight += parseInt(window.getComputedStyle(element).getPropertyValue('margin-top'));
-        elHeight += parseInt(window.getComputedStyle(element).getPropertyValue('margin-bottom'));
-        this.progressHeight = elHeight * (index + 1) + 'px';
     },
     data() {
         return {
@@ -116,25 +120,24 @@ export default {
                     title: 'DEVELOP INITIAL GUINEA PIGS',
                     reached: true,
                     description:
-                        'You have been invited to the party of the century. Grab your Guinea Pig and their favourite outfit and prepare to get downand boogie.'
+                        'We are currently still developing the art and technology to get this amazing party started. You can check us out over at the discord, we want to hear from the sers that want to attend the party.'
                 },
                 {
                     title: 'RELEASE 5,555 GENISIS TOKENS',
                     reached: false,
                     description:
-                        'You have been invited to the party of the century. Grab your Guinea Pig and their favourite outfit and prepare to get downand boogie.'
+                        'The launch date will be announced, bow ties will be places and the party will commence. Bring the champers and all the pea flakes you can fit in your mouth. This is going to be a banger.'
                 },
                 {
                     title: 'DEVELOP "PEA FLAKE" ERC-20 TOKEN',
                     reached: false,
                     description:
-                        'You have been invited to the party of the century. Grab your Guinea Pig and their favourite outfit and prepare to get downand boogie.'
+                        '"Pea flakes" are a Guinea Pigs favourite treat. This is well known alpha. Pea flakes are valuable to a pig and they are tasty. Pea flakes may be valuable to other pigs. Pea flakes may allow you into speacial places and purchase speacial things. Tasty treat treats.'
                 },
                 {
-                    title: 'CREATE CUSTOMISABLE MARKETPLACE',
+                    title: '???',
                     reached: false,
-                    description:
-                        'You have been invited to the party of the century. Grab your Guinea Pig and their favourite outfit and prepare to get downand boogie.'
+                    description: 'TOP SECRET ALPHA COMING SOON'
                 }
             ]
         };
@@ -152,7 +155,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 300px;
 
     .image-chain {
         position: absolute;
@@ -312,6 +314,8 @@ export default {
     }
 
     @include breakpoint(laptop) {
+        padding-bottom: 100px;
+
         .roadmap {
             width: 1000px;
             justify-content: flex-start;
@@ -390,6 +394,7 @@ export default {
         }
     }
     @include breakpoint(desktop) {
+        padding-bottom: 300px;
         .roadmap {
             width: 1500px;
 
