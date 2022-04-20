@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { avatars } from './Avatars/';
+import { nfts } from './NFTs/';
 import { network } from './Network';
 import { tokens } from './Tokens';
+import { user } from './User';
 import { userInterfaceManager } from './UserInterfaceManager';
 Vue.use(Vuex);
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
     modules: {
         network,
         tokens,
-        avatars,
+        nfts,
+        user,
         userInterfaceManager,
     },
     plugins: []

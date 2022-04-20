@@ -14,10 +14,7 @@ export const state: Network = {
     web3Ready: false,
     contracts: {
         avatars: null,
-        syntheticTokens: {
-
-        },
-
+        syntheticTokens: {}
     },
     web3: null,
     ethReady: false,

@@ -1,4 +1,3 @@
-import { getTxEventParams, SYSTEM_TYPES_IDS } from '@/utils/index';
 import { ActionTree, ActionContext } from 'vuex';
 import { RootState, Tokens, TxResult } from '../types';
 import Web3 from 'web3';

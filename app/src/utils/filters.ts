@@ -21,6 +21,12 @@ Vue.filter('fromWeiToReadable', function (value: string) {
     const readable = web3.utils.fromWei(value, "ether")
     return readable;
 });
+Vue.filter('capitilise', function (value: string) {
+    if (!value) {
+        return '';
+    }
+    return value.charAt(0).toUpperCase() + value.slice(1);
+});
 
 
 Vue.filter('increment', function (value: number, amount: number) {

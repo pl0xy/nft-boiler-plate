@@ -24,14 +24,14 @@ export default {
     border: none;
     padding: 15px;
     border-radius: 12px;
-    background: var(--button-color);
-    transition: 0.2s;
+    background: var(--main);
+    transition: 0.1s;
     @include FS_Super_Bold;
     font-size: 24pt;
     outline: none;
     &:hover {
         cursor: pointer;
-        transform: translateY(-10px);
+        transform: translateY(-5px);
     }
 }
 
@@ -44,7 +44,7 @@ export default {
 }
 
 .primary {
-    background: var(--button-color);
+    background: var(--main);
     color: white;
     &:hover {
     }

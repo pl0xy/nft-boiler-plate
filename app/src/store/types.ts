@@ -23,19 +23,25 @@ export interface NetworkData {
     network: string;
     networkId: number;
 }
+export interface User {
 
-
-export interface Avatars {
-    balance: string;
+}
+export interface ISocialMedia {
+    name: string;
+    url: string;
+}
+export interface NFTs {
+    balance: {
+        [key: string]: NFT[];
+    },
     tokens: {
-        [key: string]: Avatar;
+        [key: string]: NFT[];
     }
 }
 
-export interface Avatar {
-    name: string;
-    pendingRoyalties: string;
-    id: string;
+export interface NFT {
+    [key: string]: any;
+    result: any[];
 }
 
 export interface Tokens {

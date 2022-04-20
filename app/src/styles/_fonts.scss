@@ -105,6 +105,15 @@ html {
 p {
     font-family: 'Ubuntu', sans-serif;
     line-height: 30px;
-    color: white;
+    color: var(--offset-white);
     font-size: 16pt;
+}
+
+a{
+    color: var(--offset-white);
+
+    &:hover {
+        color: var(--second);
+        cursor: pointer;
+    }
 }

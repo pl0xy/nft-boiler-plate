@@ -7,7 +7,5 @@ export const getters: GetterTree<Network, RootState> = {
     Network: state => state.networkData.network,
     NetworkId: (state): number => state.networkData.networkId,
     Tokens: state => (syntheticToken: string) => state.contracts.syntheticTokens[syntheticToken],
-    Avatars: state =>  state.contracts.avatars,
-
+    Avatars: state => state.contracts.avatars
 };
-

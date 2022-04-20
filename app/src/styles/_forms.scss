@@ -3,7 +3,16 @@ input {
     border: none;
     outline: none;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
 .form-row {
     width: 100%;
     position: relative;
@@ -13,49 +22,73 @@ input {
         position: absolute;
         left: 25px;
         top: 15px;
-        color: var(--main-secondary);
+        color: var(--offset-white);
         text-transform: uppercase;
         font-size: var(--sm-font);
 
         @include FS_Light;
-
     }
 
-    input {
+    input:focus + label {
+        color: var(--main);
+    }
+    input,
+    select {
         width: 100%;
         height: 80px;
         border-radius: 8px;
-        background: var(--sub-foreground-color);
+        background: var(--background-color);
         box-sizing: border-box;
         padding: 25px 250px 0 25px;
         font-size: var(--md-font);
-        color: var(--main-font);
-        border: 1px solid var(--sub-foreground-color);
+        color: var(--offset-white);
+        border: 1px solid var(--background-color);
         @include FS_Medium;
+    }
+    select {
+        padding-right: 60px;
+        outline: none;
 
-        &:active,
-        &:focus {
-            border: 1px solid var(--button-color);
+        option {
+            font-size: var(--lg-font);
         }
     }
-
-    ::-webkit-input-placeholder {
-        /* Chrome/Opera/Safari */
-        color: var(--main-secondary);
+    textarea {
+        width: 100%;
+        height: 200px;
+        border-radius: 8px;
+        background: var(--background-color);
+        box-sizing: border-box;
+        padding: 35px 250px 0 25px;
+        font-size: var(--md-font);
+        color: var(--offset-white);
+        border: 1px solid var(--background-color);
+        outline: none;
+        @include FS_Medium;
     }
+}
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--first-shade);
+    opacity: 1; /* Firefox */
+}
 
-    ::-moz-placeholder {
-        /* Firefox 19+ */
-        color: var(--main-secondary);
-    }
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: var(--first-shade);
+}
 
-    :-ms-input-placeholder {
-        /* IE 10+ */
-        color: var(--main-secondary);
-    }
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: var(--first-shade);
+}
 
-    :-moz-placeholder {
-        /* Firefox 18- */
-        color: var(--main-secondary);
-    }
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: var(--first-shade);
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: var(--first-shade);
 }

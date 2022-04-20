@@ -2,8 +2,9 @@
     <header class="header-nav">
         <div class="content">
             <div class="logo-container">
-                <h2>G.P <sushi /> C.P</h2>
+                <a @click.prevent="navigateHome()"><h2>MetaBook</h2></a>
             </div>
+            <SearchBar class="search-bar" @selected="searchCollection" />
             <div class="nav">
                 <a class="social-media" href="https://discord.gg/bT9q7r2vaT" target="_blank"
                     ><opensea class="social-media"
@@ -13,7 +14,10 @@
                 <button v-if="Address == emptyAddress" class="connect" @click="connectWallet()">
                     Connect
                 </button>
-                <button v-if="Address != emptyAddress" class="address">{{ Address | shortAddress }}</button>
+                <button v-if="Address != emptyAddress" class="address" @click="logout()">
+                    {{ Address | shortAddress }}
+                    <img class="blockie" :src="blockie(Address)" />
+                </button>
             </div>
         </div>
     </header>
@@ -28,19 +32,31 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import opensea from '@/assets/svg/opensea.svg';
 import twitter from '@/assets/svg/twitter.svg';
 import discord from '@/assets/svg/discord.svg';
-import sushi from '@/assets/svg/sushi.svg';
+import SearchBar from '@/components/generics/SearchBar.vue';
+import makeBlockie from 'ethereum-blockies-base64';
+import router from '../router';
 
 export default {
+    name: 'Header',
     components: {
         opensea,
         twitter,
         discord,
-        sushi
+        SearchBar
     },
     methods: {
-        ...mapActions(['bootstrapContracts']),
+        ...mapActions(['login', 'logout']),
         async connectWallet() {
-            await this.bootstrapContracts();
+            await this.login();
+        },
+        blockie(address) {
+            return makeBlockie(address);
+        },
+        navigateHome() {
+            router.push({ path: `/` });
+        },
+        searchCollection(address) {
+            router.push({ path: `/nft/${address}` });
         }
     },
     computed: {
@@ -59,10 +75,19 @@ export default {
 <style scoped lang="scss">
 @import '@/styles';
 .header-nav {
-    width: 100%;
     height: 100px;
     display: flex;
     justify-content: center;
+    background-color: var(--first-shade);
+    padding: 0 1%;
+    .search-bar {
+        width: 700px;
+    }
+    .blockie{
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+    }
     .balance-wallet {
         position: absolute;
         right: 300px;
@@ -87,7 +112,6 @@ export default {
     }
     @include breakpoint(mobileonly) {
         .content {
-            width: 100% !important;
         .nav .social-media{
             display: none;
         }
@@ -95,7 +119,6 @@ export default {
     }
     @include breakpoint(tablet) {
         .content {
-            width: 100% !important;
             .nav {
                 display: none;
             }
@@ -103,7 +126,6 @@ export default {
     }
     @include breakpoint(phablet) {
         .content {
-            width: 100% !important;
             .nav {
                 display: none;
             }
@@ -111,27 +133,23 @@ export default {
     }
 
     @include breakpoint(laptop) {
-        .content {
-            width: 1000px !important;
-        }
+
     }
     @include breakpoint(desktop) {
-        .content {
-            width: 1500px !important;
-        }
+
     }
     .content {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: inherit;
+        width: 100%;
         top: 0;
         margin:: 0 10px;
         .logo-container {
             display: flex;
             justify-content: center;
             align-items: center;
-
+            margin-right: 100px;
             svg {
                 height: 50px;
                 width: 40px;
@@ -140,6 +158,7 @@ export default {
                 line-height: 20px;
                 display: flex;
                 justify-content: center;
+                color: var(--main);
                 align-items: center;
             }
         }
@@ -155,20 +174,20 @@ export default {
             align-items: center;
 
             .social-media {
-
                 & > * {
-
-                padding: 5px;
-                height: 35px;
-                width: 35px;
-                margin-right: 40px;
-
-                &:hover {
-                    cursor: pointer;
+                    padding: 5px;
+                    height: 35px;
+                    width: 35px;
+                    margin-right: 40px;
                     path {
-                        fill: var(--button-color);
+                            fill: var(--background-color);
+                        }
+                    &:hover {
+                        cursor: pointer;
+                        path {
+                            fill: var(--main);
+                        }
                     }
-                }
                 }
             }
         }
@@ -182,13 +201,16 @@ export default {
             background: transparent;
             transition: 0.2s;
             font-size: var(--md-font);
-            color: var(--button-color);
-            border: 3px solid var(--button-color);
+            color: var(--background-color);
+            border: 3px solid var(--main);
+            background: var(--main);
             font-weight: 700;
             outline: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             &:hover {
                 cursor: pointer;
-                background: var(--button-color);
                 color: white;
             }
         }
@@ -207,9 +229,6 @@ export default {
             align-items: center;
             height: 50px;
             min-width: 100px;
-
-            padding: 0 10px;
-            padding-top: 9px;
             justify-content: center;
         }
     }

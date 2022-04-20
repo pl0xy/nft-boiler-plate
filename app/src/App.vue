@@ -1,13 +1,16 @@
 <template>
     <div id="app">
-        <router-view />
+        <Header :class="ShowModal ? 'blur' : ''" />
+        <div class="router-wrapper">
+            <router-view class="router" :class="ShowModal ? 'blur' : ''" />
+        </div>
         <Modal v-if="ShowModal" @close="UIM_closeModal" />
     </div>
 </template>
 <script>
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
-import Modal from '@/components/generics/Modal.vue';
+import Modal from '@/components/modals/Modal.vue';
 import Header from '@/components/Header.vue';
 export default {
     name: 'App',
@@ -15,21 +18,15 @@ export default {
         ...mapGetters(['ShowModal'])
     },
     components: {
-        Modal
+        Modal,
+        Header
     },
     methods: {
-        ...mapActions(['setAddress', 'bootstrapContracts'])
+        ...mapActions(['bootstrap', 'bootstrapContracts'])
     },
 
     async mounted() {
-        await window.ethereum.on('accountsChanged', async accounts => {
-            if (accounts[0]) {
-                if (this.SignoToken == null) await this.bootstrapContracts();
-                await this.setAddress({ address: accounts[0] });
-            }
-        });
-
-        const accounts = await window.ethereum.enable();
+        this.bootstrap();
     }
 };
 </script>
@@ -41,11 +38,25 @@ export default {
     text-align: center;
     color: #2c3e50;
     height: 100vh;
-    background-color: var(--bg-color);
+    width: 100vw;
+    background-color: var(--background-color);
     overflow: scroll;
     overflow-x: hidden;
     /* Increase/decrease this value for cross-browser compatibility */
     box-sizing: content-box;
     /* So the width will be 100% + 17px */
+}
+.router-wrapper {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .router {
+        max-width: 60%;
+    }
+}
+.blur {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
 }
 </style>
