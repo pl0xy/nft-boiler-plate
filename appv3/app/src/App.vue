@@ -1,25 +1,18 @@
 <template>
     <div id="app">
-        <Header :class="ShowModal ? 'blur' : ''" />
+        <Header :class="ui.getIsModalAwake ? 'blur' : ''" />
         <div class="router-wrapper">
-            <router-view class="router" :class="ShowModal ? 'blur' : ''" />
+            <router-view class="router" :class="ui.getIsModalAwake ? 'blur' : ''" />
         </div>
-        <Modal v-if="ShowModal" @close="UIM_closeModal" />
+        <Modal v-if="ui.getIsModalAwake" @close="ui.closeModal()" />
     </div>
 </template>
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component';
-import { Prop, Model, Ref } from 'vue-property-decorator';
+
+<script lang="ts" setup>
 import Modal from '@/components/modals/Modal.vue';
 import Header from '@/components/Header.vue';
-
-@Options({
-    components: {
-        Modal,
-        Header,
-    },
-})
-export default class App extends Vue {}
+import { useUi } from '@/store/ui';
+const ui = useUi();
 </script>
 
 <style lang="scss">

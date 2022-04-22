@@ -1,8 +1,6 @@
-import Vuex from 'vuex'
-import Ui from '@/store/modules/ui'
-const store = new Vuex.Store({
-  modules: {
-    Ui
-  }
-})
-export default store
+import { useUi } from "./ui";
+import { useUserStore } from "./useUserStore";
+export default {
+    useUi,
+    useUserStore
+}

@@ -2,37 +2,25 @@
     <div class="image-controller">
         <div class="container">
             <div class="image-container" :style="{ width: imageWidth }">
-                <img :ref="imageContainer" :src="image" />
+                <img ref="imageContainer" :src="props.image" />
             </div>
         </div>
     </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component';
-import { Prop, Model, Ref } from 'vue-property-decorator';
-import Box from '@/components/generics/Box.vue';
-import { resolveLink } from '@/utils/ipfs';
+<script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import type { Ref } from 'vue';
 
-@Options({
-    components: {
-        Box,
-    },
-})
-export default class ImageController extends Vue {
-    @Ref('imageContainer') readonly imageContainer!: HTMLElement;
-    @Prop({ required: true }) readonly image: string = '';
-    public imageWidth = '';
-    public imageWidthCss(): string {
-        return this.imageContainer.clientWidth + 'px !important';
-    }
-    mounted() {
-        this.imageWidth = this.imageWidthCss();
-    }
+const imageContainer: Ref<HTMLElement> = ref(new HTMLElement());
+const props = defineProps<{ image: string }>();
+const imageWidth = ref('');
+function imageWidthCss(): string {
+    return imageContainer.value.clientWidth + 'px !important';
 }
+onMounted(() => (imageWidth.value = imageWidthCss()));
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '@/styles';
 .image-controller {

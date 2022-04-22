@@ -1,37 +1,21 @@
 <template>
     <div class="search-bar">
-        <img :src="Search" class="search-icon" />
+        <img v-svg-inline src="@/assets/svg/search.svg" class="search-icon" />
         <input
             @focus="searchFocused = true"
             @blur="searchFocused = false"
             placeHolder="0x0c2E57EFddbA8c768147D1fdF9176a0A6EBd5d83"
-            v-on:keyup.enter="selected"
+            v-on:keyup.enter="$emit('selected', address)"
             v-model="address"
         />
     </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component';
-import { Prop, Model, Emit } from 'vue-property-decorator';
-import { Address } from '@/Types';
-import Search from '@/assets/svg/search.svg';
-
-export default class SearchBar extends Vue {
-    public searchFocused = false;
-    @Model('change', { type: String }) readonly address!: Address;
-
-    @Emit()
-    selected() {
-        return this.address;
-    }
-
-    setup() {
-        return {
-            Search,
-        };
-    }
-}
+<script setup lang="ts">
+import { ref } from 'vue';
+const searchFocused = false;
+const address = ref('');
+defineEmits(['selected']);
 </script>
 <style scoped lang="scss">
 @import '@/styles';
@@ -39,6 +23,7 @@ export default class SearchBar extends Vue {
     position: relative;
     display: flex;
     align-items: center;
+
     input {
         width: 100%;
         border-radius: 8px;
@@ -62,9 +47,7 @@ export default class SearchBar extends Vue {
     .search-icon {
         position: absolute;
         left: 10px;
-        path {
-            fill: var(--first-shade);
-        }
+        fill: var(--second-shade) !important;
     }
 }
 </style>

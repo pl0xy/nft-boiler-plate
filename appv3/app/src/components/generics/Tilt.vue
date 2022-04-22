@@ -1,22 +1,17 @@
+<script setup lang="ts">
+import VanillaTilt from 'vanilla-tilt';
+import type { Ref } from 'vue';
+import { ref } from 'vue';
+const props = defineProps<{ options: Object; parallax: false }>();
+const tiltRef: Ref<HTMLElement> = ref(new HTMLElement());
+VanillaTilt.init(tiltRef.value, props.options);
+</script>
+
 <template>
-    <div :class="parallax ? 'preserve' : ''" id="tiltMe" :ref="tiltRef">
+    <div :class="parallax ? 'preserve' : ''" id="tiltMe" ref="tiltRef">
         <slot></slot>
     </div>
 </template>
-<script lang="ts">
-import VanillaTilt from 'vanilla-tilt';
-import { Component, Prop Ref } from 'vue-property-decorator';
-import { Vue } from 'vue-class-component';
-export default class Tilt extends Vue {
-    @Prop({ required: true }) readonly options: object = {};
-    @Prop({ required: true }) readonly parallax = false;
-    @Ref('tiltRef') tiltRef!: HTMLElement;
-
-    mounted() {
-        VanillaTilt.init(this.tiltRef, this.options);
-    }
-}
-</script>
 
 <style>
 .preserve {

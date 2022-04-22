@@ -1,21 +1,35 @@
 <template>
-    <div class="nft-balance">Here</div>
+    <div>
+        <div class="nft-balance" v-if="balance == null">Not logged in</div>
+        <div class="nft-balance" v-if="balance">
+            <Card
+                v-for="(item, index) in balance"
+                :title="item.name"
+                :key="index"
+                :image="item.image"
+                @click.native="navigateToItem(item)"
+            />
+        </div>
+    </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component';
-import { Prop, Model, Ref } from 'vue-property-decorator';
-import router from '@/router';
+<script setup lang="ts">
+import { useNftBalance } from '@/hooks/moralis/useNftBalance';
+import { useUser } from '@/hooks/moralis/useUser';
+import { useUserStore } from '@/store/useUserStore';
 import { addressZero } from '@/utils';
+import { ref } from 'vue';
+import Card from '@/components/generics/Card.vue';
+import router from '@/router';
+const userStore = useUserStore();
+const address = ref(userStore.getAddress);
+const { balance, error } = useNftBalance(address);
 
-export default class NftBalance extends Vue {
-    tokenAddress: string = addressZero;
-    navigateTo(path: string) {
-        router.push({ path });
-    }
-    mounted() {
-        this.tokenAddress = this.$route.params.address as string;
-    }
+userStore.$subscribe((mutation, state) => {
+    address.value = userStore.getAddress;
+});
+function navigateToItem(item: any): void {
+    router.push({ path: `/nft/${item.token_address}/${item.token_id}` });
 }
 </script>
 <style lang="scss">

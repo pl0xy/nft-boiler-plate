@@ -1,49 +1,40 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useUi } from '@/store/ui';
+import { IModal } from '@/types';
+import type { Ref } from 'vue';
+
+const container: Ref<HTMLElement> = ref(new HTMLElement());
+const ui = useUi();
+const modal: Ref<IModal> = ref(ui.getModal);
+function checkClick(event: MouseEvent) {
+    const modalRect = container.value.getBoundingClientRect();
+    const mousePos = {
+        x: event.x,
+        y: event.y,
+    };
+    if (mousePos.x == 0 && mousePos.y == 0) return;
+    if (modal.value.content == 'connectWallet') return;
+    if (
+        mousePos.x <= modalRect.x ||
+        mousePos.x >= modalRect.x + modalRect.width ||
+        mousePos.y <= modalRect.y ||
+        mousePos.y >= modalRect.y + modalRect.height
+    )
+        ui.closeModal();
+}
+</script>
+
 <template>
     <transition name="modal" appear>
         <div class="modal-mask" @mousedown="checkClick">
             <div class="modal-wrapper">
-                <div class="modal-container" ref="container">Here</div>
+                <div class="modal-container" ref="container">{{ modal.content }}</div>
             </div>
         </div>
     </transition>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component';
-import { Prop, Model, Ref } from 'vue-property-decorator';
-import { namespace } from 'vuex-class';
-import { IModal } from '@/Types';
-
-const ui = namespace('ui');
-export default class Modal extends Vue {
-    @Ref('container') readonly container!: HTMLElement;
-    @Prop({ required: true }) readonly Modal: IModal = {
-        show: false,
-        content: '',
-    };
-    @ui.Action
-    public closeModal!: () => void;
-
-    public checkClick(event: MouseEvent) {
-        const modalRect = this.container.getBoundingClientRect();
-        const mousePos = {
-            x: event.x,
-            y: event.y,
-        };
-        if (mousePos.x == 0 && mousePos.y == 0) return;
-        if (this.Modal.content == 'connectWallet') return;
-        if (
-            mousePos.x <= modalRect.x ||
-            mousePos.x >= modalRect.x + modalRect.width ||
-            mousePos.y <= modalRect.y ||
-            mousePos.y >= modalRect.y + modalRect.height
-        )
-            this.closeModal();
-    }
-}
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .modal-mask {
     position: fixed;

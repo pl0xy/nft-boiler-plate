@@ -4,7 +4,6 @@ $md-font: 11pt;
 $lg-font: 16pt;
 $xlg-font: 20pt;
 
-
 :root {
     // RIGHT, will work in all Sass versions.
     --xsm-font: #{$xsm-font};
@@ -14,7 +13,7 @@ $xlg-font: 20pt;
     --xlg-font: #{$xlg-font};
 }
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@0,400;0,700&display=swap');
-@import url("https://use.typekit.net/qnz1vyv.css");
+@import url('https://use.typekit.net/qnz1vyv.css');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&display=swap');
 
 $base-size: 5;
@@ -97,7 +96,6 @@ $FS_Bold_Italic: 'Davis Sans Bold Italic';
     font-style: italic;
 }
 
-
 html {
     @include FS_Regular;
 }
@@ -109,7 +107,7 @@ p {
     font-size: 16pt;
 }
 
-a{
+a {
     color: var(--offset-white);
 
     &:hover {

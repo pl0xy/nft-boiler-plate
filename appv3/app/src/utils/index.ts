@@ -6,11 +6,11 @@ export const capitilise = (value: string) => {
         return '';
     }
     return value.charAt(0).toUpperCase() + value.slice(1);
-}
+};
 
 export const shortAddress = (value: string) => {
     if (!value) {
         return '';
     }
     return value.substring(0, 6) + '...' + value.substring(value.length - 4, value.length + 1);
-}
+};

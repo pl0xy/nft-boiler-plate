@@ -1,23 +1,14 @@
 <template>
     <Box>
         <div v-if="image" slot="boxContent" class="card">
-            <img :src="image" />
+            <img :src="props.image" />
         </div>
     </Box>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component';
-import { Prop, Model, Ref } from 'vue-property-decorator';
+<script setup lang="ts">
 import Box from '@/components/generics/Box.vue';
-
-@Options({
-    props: ['title', 'image', 'subtitle'],
-    components: {
-        Box,
-    },
-})
-export default class Card extends Vue {}
+const props = defineProps<{ image: string }>();
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

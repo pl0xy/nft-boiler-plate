@@ -1,3 +1,24 @@
+<script lang="ts" setup>
+import SearchBar from '@/components/generics/SearchBar.vue';
+import makeBlockie from 'ethereum-blockies-base64';
+import router from '@/router';
+import { Address } from '@/types';
+import { addressZero, shortAddress } from '@/utils';
+import store from '@/store/';
+import { useUser } from '@/hooks/moralis/useUser';
+import { ref, watch } from 'vue';
+const { address, login, logout } = useUser();
+function blockie(address: Address) {
+    return makeBlockie(address);
+}
+function navigateHome(): void {
+    router.push({ path: `/` });
+}
+function searchCollection(address: Address): void {
+    router.push({ path: `/nft/${address}` });
+}
+</script>
+
 <template>
     <header class="header-nav">
         <div class="content">
@@ -15,45 +36,15 @@
                 <a class="social-media" href="https://twitter.com/GPCP_community">
                     <img v-svg-inline class="icon" src="@/assets/svg/twitter.svg" alt="example svg image" />
                 </a>
-                <button v-if="Address == emptyAddress" class="connect" @click="connectWallet()">
-                    Connect
-                </button>
-                <button v-if="Address != emptyAddress" class="address" @click="logout()">
-                    {{ Address | shortAddress }}
-                    <img class="blockie" :src="blockie(Address)" />
+                <button v-if="address == addressZero" class="connect" @click="login()">Connect</button>
+                <button v-if="address != addressZero" class="address" @click="logout()">
+                    {{ shortAddress(address) }}
+                    <img class="blockie" :src="blockie(address)" />
                 </button>
             </div>
         </div>
     </header>
 </template>
-
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component';
-import { Prop, Model, Ref } from 'vue-property-decorator';
-
-import SearchBar from '@/components/generics/SearchBar.vue';
-import makeBlockie from 'ethereum-blockies-base64';
-import router from '@/router';
-import { Address } from '@/Types';
-import { addressZero } from '@/utils';
-
-@Options({
-    components: {
-        SearchBar,
-    },
-})
-export default class Header extends Vue {
-    public blockie(address: Address) {
-        return makeBlockie(address);
-    }
-    public navigateHome(): void {
-        router.push({ path: `/` });
-    }
-    public searchCollection(address: Address): void {
-        router.push({ path: `/nft/${address}` });
-    }
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">

@@ -1,3 +1,1 @@
-export default function network() {
-
-}
+export default function network() {}

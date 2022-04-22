@@ -9,7 +9,7 @@ export function verifyMetadata(NFT: any) {
     //Pass Through if Metadata already present
     if (NFT.metadata) {
         NFT.metadata = checkMetadataIsString(NFT.metadata) ? JSON.parse(NFT.metadata) : NFT.metadata;
-        NFT.image = NFT.metadata?.image ? resolveLink(NFT.metadata.image): NFT.image;
+        NFT.image = NFT.metadata?.image ? resolveLink(NFT.metadata.image) : NFT.image;
         return NFT;
     }
     //Get the Metadata

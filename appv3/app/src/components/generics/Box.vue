@@ -1,26 +1,20 @@
+<script setup lang="ts">
+const props = defineProps<{ boxName?: string }>();
+</script>
+
 <template>
     <div class="box">
-        <div v-if="boxName" class="names">
+        <div v-if="props.boxName" class="names">
             <div class="panelB">
-                {{ boxName }}
+                {{ props.boxName }}
             </div>
         </div>
         <div class="slots">
-            <slot class="slot" name="boxContent"></slot>
+            <slot class="slot"></slot>
         </div>
     </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component';
-import { Prop, Model, Ref } from 'vue-property-decorator';
-@Options({
-    props: ['boxName'],
-})
-export default class Box extends Vue {}
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '@/styles';
 

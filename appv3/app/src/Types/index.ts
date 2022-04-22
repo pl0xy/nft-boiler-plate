@@ -7,10 +7,10 @@ export interface ISocialMedia {
 export interface NFTs {
     balance: {
         [key: string]: NFT[];
-    },
+    };
     tokens: {
         [key: string]: NFT[];
-    }
+    };
 }
 
 export interface NFT {
@@ -26,30 +26,31 @@ export interface IModal {
     };
 }
 
-export type ChainList = "eth"
-    | "0x1"
-    | "ropsten"
-    | "0x3"
-    | "rinkeby"
-    | "0x4"
-    | "goerli"
-    | "0x5"
-    | "kovan"
-    | "0x2a"
-    | "polygon"
-    | "0x89"
-    | "mumbai"
-    | "0x13881"
-    | "bsc"
-    | "0x38"
-    | "bsc testnet"
-    | "0x61"
-    | "avalanche"
-    | "0xa86a"
-    | "avalanche testnet"
-    | "0xa869"
-    | "fantom"
-    | "0xfa";
+export type ChainList =
+    | 'eth'
+    | '0x1'
+    | 'ropsten'
+    | '0x3'
+    | 'rinkeby'
+    | '0x4'
+    | 'goerli'
+    | '0x5'
+    | 'kovan'
+    | '0x2a'
+    | 'polygon'
+    | '0x89'
+    | 'mumbai'
+    | '0x13881'
+    | 'bsc'
+    | '0x38'
+    | 'bsc testnet'
+    | '0x61'
+    | 'avalanche'
+    | '0xa86a'
+    | 'avalanche testnet'
+    | '0xa869'
+    | 'fantom'
+    | '0xfa';
 
 export interface INftOwnerCollection {
     status?: string;
@@ -58,7 +59,7 @@ export interface INftOwnerCollection {
     page_size?: number;
     cursor?: string;
     result?: INftOwner[];
-};
+}
 export interface INftOwner {
     /**
      * @description The address of the contract of the NFT
@@ -111,4 +112,4 @@ export interface INftOwner {
      * @example RARI
      */
     symbol: string;
-};
+}
