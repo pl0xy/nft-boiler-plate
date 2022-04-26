@@ -20,15 +20,10 @@ const ui = useUi();
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    height: 100vh;
-    width: 100vw;
     background-color: var(--background-color);
-    overflow: scroll;
-    overflow-x: hidden;
+    height: 100%;
+
     /* Increase/decrease this value for cross-browser compatibility */
-    box-sizing: content-box;
     /* So the width will be 100% + 17px */
 }
 .router-wrapper {
@@ -36,6 +31,7 @@ const ui = useUi();
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     .router {
         max-width: 60%;
     }

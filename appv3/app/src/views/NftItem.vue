@@ -1,11 +1,10 @@
 <template>
-    <div class="nft-item">
-        {{ nft }}
+    <div class="nft-item" v-if="nft">
         <div class="left-column">
             <Tilt :options="tiltOptions">
                 <ImageController data-tilt ref="imageRef" class="image" :image="nft.image" />
             </Tilt>
-            <ItemDescription :description="nft.metadata.description" title="Description" />
+            <TextBox :text="nft.metadata.description" title="Description" />
         </div>
         <div class="right-column">
             <div class="details">
@@ -15,20 +14,23 @@
                 <h1>{{ nft.metadata.name }}</h1>
                 <h4>Owner: {{ nft.owner_of }}</h4>
             </div>
-            <SocialMedia @selected="handleSocialSelection" />
+            <!-- <SocialMedia @selected="handleSocialSelection" /> -->
         </div>
     </div>
+    <div v-else>...loading</div>
 </template>
 
 <script setup lang="ts">
 import Tilt from '@/components/generics/Tilt.vue';
 import SocialMedia from '@/components/generics/SocialMedia.vue';
 import ImageController from '@/components/generics/ImageController.vue';
-import ItemDescription from '@/components/items/ItemDescription.vue';
+import TextBox from '@/components/generics/TextBox.vue';
 import { useRoute } from 'vue-router';
 import { Address } from '@/types';
+import { useFetchNftMetadata } from '@/hooks/moralis/useFetchNftMetadata';
 
 import router from '@/router';
+import { ref } from 'vue';
 const route = useRoute();
 
 const tiltOptions = {
@@ -59,21 +61,11 @@ const tiltOptions = {
 const token_address = route.params.address;
 const token_id = route.params.tokenID;
 
-await this.NFTs_fetchTokenMetadata({
-    address: token_address,
-    token_id: token_id,
-});
-const nft = this.NFT_getTokenByID(token_address, token_id);
+const addressRef = ref(token_address as string);
+const idRef = ref(token_id as string);
 
-function handleSocialSelection(social: Object) {
-    this.UIM_openModal({
-        show: true,
-        content: 'edit-socials',
-        data: {
-            ...social,
-        },
-    });
-}
+const { nft } = useFetchNftMetadata(addressRef, idRef);
+
 function navigateToCollection(token_address: Address) {
     router.push({ path: `/nft/${token_address}/` });
 }

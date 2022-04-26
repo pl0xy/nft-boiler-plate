@@ -1,14 +1,5 @@
-<script setup lang="ts">
-const props = defineProps<{ boxName?: string }>();
-</script>
-
 <template>
     <div class="box">
-        <div v-if="props.boxName" class="names">
-            <div class="panelB">
-                {{ props.boxName }}
-            </div>
-        </div>
         <div class="slots">
             <slot class="slot"></slot>
         </div>
@@ -28,7 +19,7 @@ const props = defineProps<{ boxName?: string }>();
     overflow: hidden;
     align-items: center;
     border-radius: 12px;
-    padding: 5px;
+    padding: 20px;
     @include box-shadow();
 
     .names {

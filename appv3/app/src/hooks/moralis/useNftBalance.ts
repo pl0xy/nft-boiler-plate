@@ -5,8 +5,8 @@ import { verifyMetadata } from './useMetadata';
 import { ref, unref, watchEffect, isRef, Ref, watch } from 'vue';
 import Moralis from 'moralis';
 
+const balance: Ref<any> = ref(null);
 export const useNftBalance = (address: Ref<string>, chainId?: ChainList) => {
-    const balance: Ref<any> = ref(null);
     const error: Ref<null | Error> = ref(null);
     function fetchBalance() {
         if (address.value == addressZero) {

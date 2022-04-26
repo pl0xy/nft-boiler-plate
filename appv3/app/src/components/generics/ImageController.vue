@@ -10,13 +10,14 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import type { Ref } from 'vue';
-
-const imageContainer: Ref<HTMLElement> = ref(new HTMLElement());
+const imageContainer = ref<HTMLElement | null>(null);
 const props = defineProps<{ image: string }>();
 const imageWidth = ref('');
 function imageWidthCss(): string {
-    return imageContainer.value.clientWidth + 'px !important';
+    if (imageContainer && imageContainer.value) {
+        return imageContainer.value.clientWidth + 'px !important';
+    }
+    return '';
 }
 onMounted(() => (imageWidth.value = imageWidthCss()));
 </script>

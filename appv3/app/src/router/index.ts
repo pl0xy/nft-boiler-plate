@@ -1,11 +1,20 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import NftBalance from '../views/NftBalance.vue';
 import NftItem from '../views/NftItem.vue';
-// import NftCollection from '../views/NftCollection.vue';
+import NftCollection from '../views/NftCollection.vue';
+import Feed from '../views/Feed.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
+        name: 'Feed',
+        component: Feed,
+        meta: {
+            title: 'MetaBook',
+        },
+    },
+    {
+        path: '/account',
         name: 'NftBalance',
         component: NftBalance,
         meta: {
@@ -23,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/nft/:address',
         name: 'NftCollection',
-        component: NftBalance,
+        component: NftCollection,
         meta: {
             title: 'MetaBook',
         }

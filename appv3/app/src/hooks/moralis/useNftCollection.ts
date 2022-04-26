@@ -1,28 +1,28 @@
 import { addressZero } from '@/utils/index';
-import { Address, ChainList } from '@/types';
-
+import { ChainList } from '@/types';
 import { verifyMetadata } from './useMetadata';
-import { ref, unref, watchEffect, isRef, Ref, watch } from 'vue';
+import { ref, watchEffect, Ref } from 'vue';
 import Moralis from 'moralis';
 
-export const useNftBalance = (address: Ref<string>, chainId?: ChainList) => {
-    const balance: Ref<any> = ref(null);
+export const useNftCollection = (address: Ref<string>, chainId?: ChainList) => {
+    const collection: Ref<any[]> = ref([]);
     const error: Ref<null | Error> = ref(null);
-    function fetchBalance() {
+    function fetchCollection() {
         if (address.value == addressZero) {
-            balance.value = null;
+            collection.value = [];
             return;
         }
-        Moralis.Web3API.account
-            .getNFTs({ chain: chainId ? chainId : 'eth', address: address.value })
+        Moralis.Web3API.token
+            .getAllTokenIds({ chain: chainId ? chainId : 'eth', address: address.value })
             .then((nfts: any) => {
-                balance.value = nfts?.result.map((result: any) => verifyMetadata(result));
+                console.log(nfts);
+                collection.value = nfts?.result.map((result: any) => verifyMetadata(result));
             })
             .catch((e: Error) => { error.value = e })
     }
 
-    watchEffect(fetchBalance);
+    watchEffect(fetchCollection);
 
-    return { balance, error, address, fetchBalance }
+    return { collection, error, address, fetchCollection }
 }
 

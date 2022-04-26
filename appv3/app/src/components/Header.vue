@@ -50,7 +50,7 @@ function searchCollection(address: Address): void {
 <style scoped lang="scss">
 @import '@/styles';
 .header-nav {
-    height: 100px;
+    height: 75px;
     display: flex;
     justify-content: center;
     background-color: var(--first-shade);

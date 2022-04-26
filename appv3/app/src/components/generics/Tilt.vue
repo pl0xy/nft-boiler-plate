@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import VanillaTilt from 'vanilla-tilt';
-import type { Ref } from 'vue';
+import { onMounted, Ref } from 'vue';
 import { ref } from 'vue';
 const props = defineProps<{ options: Object; parallax?: false }>();
-const tiltRef: Ref<HTMLElement> = ref(new HTMLElement());
-VanillaTilt.init(tiltRef.value, props.options);
+const tiltRef = ref<HTMLElement | null>(null);
+
+onMounted(() => VanillaTilt.init(tiltRef.value as HTMLElement, props.options));
 </script>
 
 <template>

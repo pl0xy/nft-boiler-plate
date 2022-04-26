@@ -29,7 +29,7 @@ defineEmits(['selected']);
         border-radius: 8px;
         background: var(--background-color);
         box-sizing: border-box;
-        padding: 15px;
+        padding: 10px;
         padding-left: 75px;
         color: var(--second-shade);
         border: 1px solid var(--background-color);
@@ -47,6 +47,7 @@ defineEmits(['selected']);
     .search-icon {
         position: absolute;
         left: 10px;
+        height: 20px;
         fill: var(--second-shade) !important;
     }
 }

@@ -15,15 +15,13 @@
 
 <script setup lang="ts">
 import { useNftBalance } from '@/hooks/moralis/useNftBalance';
-import { useUser } from '@/hooks/moralis/useUser';
 import { useUserStore } from '@/store/useUserStore';
-import { addressZero } from '@/utils';
 import { ref } from 'vue';
 import Card from '@/components/generics/Card.vue';
 import router from '@/router';
 const userStore = useUserStore();
 const address = ref(userStore.getAddress);
-const { balance, error } = useNftBalance(address);
+const { balance } = useNftBalance(address);
 
 userStore.$subscribe((mutation, state) => {
     address.value = userStore.getAddress;

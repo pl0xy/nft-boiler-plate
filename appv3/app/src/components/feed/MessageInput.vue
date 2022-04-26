@@ -1,33 +1,29 @@
 <template>
-    <Box>
-        <div v-if="image" slot="boxContent" class="card">
-            <img :src="props.image" />
-        </div>
-    </Box>
+    <div slot="boxContent" class="feed">
+        <input />
+    </div>
 </template>
 
-<script setup lang="ts">
-import Box from '@/components/generics/Box.vue';
-const props = defineProps<{ image: string }>();
-</script>
+<script setup lang="ts"></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '@/styles';
 
-.card {
+.feed {
     position: relative;
     display: flex;
-    height: 300px;
-    width: 300px;
+    width: inherit;
     top: 0;
     flex-direction: column;
     justify-content: start;
     overflow: hidden;
     align-items: center;
     border-radius: 12px;
-    img {
+    input {
         max-width: 100%;
+        width: inherit;
+        height: 150px;
         max-height: 100%;
     }
 }
